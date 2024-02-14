@@ -1,0 +1,98 @@
+@use "mixins";
+@use "timeline";
+@import "./_tooltips.scss";
+
+/* Center the container */
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center; /* horizontally center */
+  align-items: center; /* vertically center */
+  height: 100vh; /* adjust as needed */
+}
+
+/* Ensure scene is positioned properly within the container */
+.scene {
+  position: relative;
+}
+
+/* Center sg-picture within scene */
+.sg-picture {
+  margin-top: 7vh
+}
+
+/* Other CSS styles as needed */
+@media only screen and (max-width: 768px) {
+  .sg_picture {
+    margin-top: -5vh;
+    margin-left: -3vh;
+  }
+  .sg-picture{
+    width: 36vh;
+    position: relative;
+    top: 0;
+  }
+  .hello-picture{
+    width: 30vh;
+  }
+  .im-picture{
+    width: 5vh;
+  }
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.image-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-container img {
+  display: block;
+  margin: 10px auto; /* Adjust spacing between images */
+}
+
+.splash2 {
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  .socials {
+    margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 24px;
+      fill: #fff;
+    }
+  }
+}
+
+#particles-js{
+  position: fixed; 
+  height: 100vh; 
+  width: 100%;
+}
+
+hr {
+  height: 5px; /* Adjust thickness as needed */
+  border: none;
+  background-image: linear-gradient(to right, 
+  yellow, red, indigo, blue, green, orange, violet); /* Rainbow gradient */
+}

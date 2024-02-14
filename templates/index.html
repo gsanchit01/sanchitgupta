@@ -1,0 +1,65 @@
+{%- extends "head.html" %}
+
+{%- block head %}
+{{ super() }}
+{{- macros_seo::seo(config=config, title="Home") }}
+{%- endblock head %}
+
+{%- block stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ get_url(path='/homepage.css', trailing_slash=false, cachebust=true) }}" />
+{%- endblock stylesheets %}
+
+{%- block content %}
+{%- set page_data = section.extra %}
+
+{# splash #}
+
+<div id="particles-js" style="z-index: 1;"></div>
+
+<div class="container">
+  <div id="scene" class="scene-container">
+    {% set hello_picture = resize_image(path=page_data.hello_picture, width=600, height=600, op="fit_width", format="webp") %}
+    <div data-depth="0.40">
+      <img class="hello-picture" src="{{ hello_picture.url }}" alt="Profile image of {{ page_data.name }}" />
+    </div>
+    {% set im_picture = resize_image(path=page_data.im_picture, width=100, height=100, op="fit_width", format="webp") %}
+    <div data-depth="1.5">
+      <img class="im-picture" src="{{ im_picture.url }}" alt="Profile image of {{ page_data.name }}" />
+    </div>
+    {% set sg_picture = resize_image(path=page_data.sg_picture, width=600, height=300, op="fit_width", format="webp") %}
+    <div class="sg_picture" data-depth="1.5">
+      <img class="sg-picture" src="{{ sg_picture.url }}" alt="Profile image of {{ page_data.name }}" />
+    </div>
+  </div>
+</div>
+
+
+<div class="splash2">
+  <div id="footer">
+    <hr>
+    <div class="socials">
+      {% for social in page_data.socials %}
+      <div class="has-tooltip">
+        <a href="{{ social.link | default(value='') }}" target="_blank" rel="noopener" data-umami-event="{{ social.name }}-social-hero">
+          {{ load_data(path=social.icon) | safe }}
+        </a>
+        <span class="tooltip" tip-position="bottom">{{ social.label }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
+<script src="particles.js"></script>
+<script src="app.js"></script>
+<script>
+  var scene = document.getElementById('scene');
+  var parallaxInstance = new Parallax(scene);
+</script>
+{% endblock scripts %}
