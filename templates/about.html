@@ -57,7 +57,11 @@
             </div>
           </div>
           <div class="card-actions">
-            <a href="{{ top_project.link }}" target="_blank" rel="noopener" class="button">
+            <a href="{{ top_project.link }}" 
+            {%- if not top_project.disabled %}
+            target="_blank" 
+            {%- endif %}
+            rel="noopener" class="button">
               {{ top_project.calltoaction }}
             </a>
           </div>

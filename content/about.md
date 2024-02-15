@@ -23,8 +23,9 @@ Feel free to get in touch or take a look at my past work below.
 [[extra.top_projects]]
 name = "Track the missing child"
 icon = "/assets/images/ttmc.png"
-link = "https://triton.rexcantor64.com"
-calltoaction = "Visit Github Code"
+disabled = false
+link = "https://github.com/gsanchit01/TTMC"
+calltoaction = "Visit Website"
 background = "#0a8f0b"
 color = "#fff"
 description = """
@@ -35,8 +36,9 @@ A missing child detection system with facial recognition capabilities, Scrap chi
 [[extra.top_projects]]
 name = "Plant Disease Detection System"
 icon = "/assets/images/pdds.png"
-link = ""
-calltoaction = "Not Live"
+disabled = true
+link = "javascript:void(0)"
+calltoaction = "Visit Website"
 background = "#e91425"
 color = "#fff"
 description = """
@@ -46,7 +48,8 @@ Implemented an AI-powered plant disease detection system, achieving a good disea
 [[extra.top_projects]]
 name = "Sentimental Analysis System"
 icon = "/assets/images/sas.png"
-link = "https://lpespaco.pt"
+disabled = false
+link = "https://github.com/gsanchit01/san-sentimentanalyser"
 calltoaction = "Visit Website"
 background = "#273377"
 color = "#fff"
