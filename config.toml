@@ -59,6 +59,11 @@ label = "Instagram"
 value = "@sanchitgupta0101"
 link = "https://www.instagram.com/sanchitgupta0101/"
 [[extra.footer.socials]]
+name = "discord"
+label = "Discord"
+value = "g.froster"
+link = "https://discord.com/users/451054079813091328"
+[[extra.footer.socials]]
 name = "linkedin"
 label = "Likedin"
 value = "in/aboutsanchitgupta"

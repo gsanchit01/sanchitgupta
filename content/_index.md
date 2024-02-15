@@ -22,6 +22,11 @@ icon = "/assets/icons/instagram.svg"
 label = "@sanchitgupta0101"
 link = "https://www.instagram.com/sanchitgupta0101/"
 [[extra.socials]]
+name = "discord"
+icon = "/assets/icons/discord.svg"
+label = "g.froster"
+link = "https://discord.com/users/451054079813091328"
+[[extra.socials]]
 name = "mail"
 icon = "/assets/icons/mail.svg"
 label = "sanchitgupta0101@gmail.com"
