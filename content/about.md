@@ -51,7 +51,7 @@ icon = "/assets/images/sas.png"
 disabled = false
 link = "https://github.com/gsanchit01/san-sentimentanalyser"
 calltoaction = "Visit Website"
-background = "#330000"
+background = "#4C0805"
 color = "#fff"
 description = """
 Sentimental analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. It allows businesses to identify customer sentiment toward products, brands or services in online conversations and feedback.
