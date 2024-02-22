@@ -26,7 +26,7 @@ icon = "/assets/images/ttmc.png"
 disabled = false
 link = "https://github.com/gsanchit01/TTMC"
 calltoaction = "Visit Website"
-background = "#0a8f0b"
+background = "#0c3536"
 color = "#fff"
 description = """
 A missing child detection system with facial recognition capabilities, Scrap children’s data from Govt. website with Selenium and scrapy and store it in Elasticsearch and then match it with live face recognition software and generate an alert to nearest police station and child parents with the GPS location of the cameras.
@@ -39,7 +39,7 @@ icon = "/assets/images/pdds.png"
 disabled = true
 link = "javascript:void(0)"
 calltoaction = "Visit Website"
-background = "#e91425"
+background = "#1F2544"
 color = "#fff"
 description = """
 Implemented an AI-powered plant disease detection system, achieving a good disease identification rate. Automation reduced detection and diagnosis time by 84%, optimizing crop management.
@@ -51,7 +51,7 @@ icon = "/assets/images/sas.png"
 disabled = false
 link = "https://github.com/gsanchit01/san-sentimentanalyser"
 calltoaction = "Visit Website"
-background = "#273377"
+background = "#330000"
 color = "#fff"
 description = """
 Sentimental analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. It allows businesses to identify customer sentiment toward products, brands or services in online conversations and feedback.

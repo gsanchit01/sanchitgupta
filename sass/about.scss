@@ -2,6 +2,10 @@
 @use "timeline";
 @import "./_tooltips.scss";
 
+.timeline-element-content{
+  background: #00000017;
+}
+
 .splash {
   min-height: 100vh;
   display: flex;
