@@ -6,6 +6,7 @@ template = "about.html"
 
 [extra]
 profile_picture = "/assets/images/profile.jpg"
+below_arrow = "/assets/images/arrow.gif"
 name = "Sanchit Gupta"
 subtitle = "About Me"
 about_me = """
@@ -15,6 +16,178 @@ I'm Sanchit Gupta from India!
 I love programming, gaming and learning new things!  
 Feel free to get in touch or take a look at my past work below.
 """
+
+################
+# TOP SKILLS #
+################
+
+[[extra.skills]]
+
+name = "Python"
+icon = "/logos/python.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "Java"
+icon = "/logos/java.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "C"
+icon = "/logos/c.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "C++"
+icon = "/logos/cpp.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "Ruby"
+icon = "/logos/ruby.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "JavaScript"
+icon = "/logos/javascript.png"
+label = "Programming Languages"
+
+[[extra.skills]]
+
+name = "Django"
+icon = "/logos/django.png"
+label = "Backend Frameworks"
+
+[[extra.skills]]
+
+name = "Flask"
+icon = "/logos/flask.png"
+label = "Backend Frameworks"
+
+[[extra.skills]]
+
+name = "Node.js"
+icon = "/logos/nodejs.png"
+label = "Backend Frameworks"
+
+[[extra.skills]]
+
+name = "Spring Boot"
+icon = "/logos/springboot.png"
+label = "Backend Frameworks"
+
+[[extra.skills]]
+
+name = "Angular.js"
+icon = "/logos/angular.png"
+label = "Frontend Frameworks"
+
+[[extra.skills]]
+
+name = "React.JS"
+icon = "/logos/react.png"
+label = "Frontend Frameworks"
+
+[[extra.skills]]
+
+name = "PostgreSQL"
+icon = "/logos/postgre.png"
+label = "Databases"
+
+[[extra.skills]]
+
+name = "Elasticsearch"
+icon = "/logos/elasticsearch.png"
+label = "Databases"
+
+[[extra.skills]]
+
+name = "MySQL"
+icon = "/logos/mysql.png"
+label = "Databases"
+
+[[extra.skills]]
+
+name = "MongoDB"
+icon = "/logos/mongodb.png"
+label = "Databases"
+
+[[extra.skills]]
+
+name = "AWS"
+icon = "/logos/aws.png"
+label = "Cloud Technologies"
+
+[[extra.skills]]
+
+name = "Microsoft Azure"
+icon = "/logos/azure.png"
+label = "Cloud Technologies"
+
+[[extra.skills]]
+
+name = "Google Cloud Platform (GCP)"
+icon = "/logos/gcp.png"
+label = "Cloud Technologies"
+
+[[extra.skills]]
+
+name = "Jenkins"
+icon = "/logos/jenkins.png"
+label = "CI/CD"
+
+[[extra.skills]]
+
+name = "Git/GitHub"
+icon = "/logos/git.png"
+label = "CI/CD"
+
+[[extra.skills]]
+
+name = "Docker"
+icon = "/logos/docker.png"
+label = "CI/CD"
+
+[[extra.skills]]
+
+name = "Jmeter"
+icon = "/logos/jmeter.png"
+label = "Testing Tools"
+
+[[extra.skills]]
+
+name = "Pytest"
+icon = "/logos/pytest.png"
+label = "Testing Tools"
+
+[[extra.skills]]
+
+name = "Selenium"
+icon = "/logos/selenium.png"
+label = "Testing Tools"
+
+[[extra.skills]]
+
+name = "Machine Learning"
+icon = "/logos/ml.png"
+label = "Additional Skills"
+
+[[extra.skills]]
+
+name = "Data Structures & Algorithms"
+icon = "/logos/dsa.png"
+label = "Additional Skills"
+
+[[extra.skills]]
+
+name = "Web Scrapping"
+icon = "/logos/scraping.png"
+label = "Additional Skills"
 
 ################
 # TOP PROJECTS #
@@ -84,10 +257,10 @@ icon = "/assets/icons/python.svg"
 background = "#36b030"
 foreground = "#fff"
 content = """
-• Improved app performance by 40% by modifying database queries and Django templates, 
+• Improved app performance by 40% by modifying Databases queries and Django templates, 
 resulting in faster loading times and enhanced scalability.  
-• Designed multiple databases and structured data to reduce application response time by up 
-to 15% and created automated testing scripts for faster data analysis and troubleshooting.
+• Designed multiple Databasess and structured data to reduce application response time by up 
+to 15% and created automated Testing Tools scripts for faster data analysis and troubleshooting.
 """
 
 [[extra.timeline]]
@@ -98,10 +271,10 @@ icon = "/assets/icons/django.svg"
 background = "#008ff8"
 foreground = "#000"
 content = """
-• Developed a robust back-end API for a trading application with a REST framework in Django, 
+• Developed a robust back-end API for a trading application with a REST Backend Frameworks in Django, 
 implemented authentication using JWT, improved user experience with custom validations, 
 and increased performance by 40%.  
-• Developed automated test cases with Python unit testing framework, improved test code 
+• Developed automated test cases with Python unit Testing Tools Backend Frameworks, improved test code 
 coverage from 60% to 80%, optimized code logic for improved performance and efficiency.
 """
 
@@ -115,7 +288,7 @@ foreground = "#fff"
 content = """
 • Developed and implemented a highly scalable Node JS and Flask microservices architecture 
 for the backend, resulting in a 50% reduction in response time.  
-• Implemented integration of Postgres database with Node JS and Flask microservices, 
+• Implemented integration of Postgres Databases with Node JS and Flask microservices, 
 leveraging AWS infrastructure and used Redis and celery to improve system speed by 40%
 """
 

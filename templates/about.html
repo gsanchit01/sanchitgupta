@@ -21,6 +21,7 @@
   <img class="profile-picture" src="{{ profile_picture.url }}" alt="Profile image of {{ page.extra.name }}" />
   <h1>{{ page.extra.name }}</h1>
   <h2>{{ page.extra.subtitle }}</h2>
+  <img style="position: absolute; bottom: 0; width: 80px; height: 80px;" class="below-arrow" src="/assets/images/arrow.gif" alt="Below arrow of {{ page.extra.name }}" />
 </div>
 
 {# about me #}
@@ -30,6 +31,34 @@
     {{ page.extra.about_me | striptags | markdown(inline=false) | safe }}
   </div>
 </div>
+
+
+{# skills #}
+
+<div class="section-title" id="skills">
+  <h2>Skills</h2>
+</div>
+
+<div class="section">
+  <div class="container">
+    {% for sectionTitle in ['Programming Languages', 'Backend Frameworks', 'Frontend Frameworks', 'Databases', 'Cloud Technologies', 'CI/CD', 'Testing Tools', 'Additional Skills'] %}
+      <h3>{{ sectionTitle }}</h3>
+      <div class="skills">
+        {% for skill in page.extra.skills %}
+          {% if skill.label == sectionTitle%}
+            <div class="skill">
+              {% set logo = resize_image(path=skill.icon, width=100, height=100, op="fit", format="webp") %}
+              <img class="skill-icon" src="{{ logo.url }}" alt="{{ skill.name }}">
+              <div class="skill-name">{{ skill.name }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+
 
 {# portfolio #}
 

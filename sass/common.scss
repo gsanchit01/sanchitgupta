@@ -166,9 +166,16 @@ body > header > nav {
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1rem; 
+    text-align: center;
   }
 }
+
+.navbar-drawer-links {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem; 
+} 
 
 footer {
   ul {
