@@ -1,0 +1,41 @@
+{%- extends "head.html" %}
+
+{%- block head %}
+{{ super() }}
+{{- macros_seo::seo(config=config, title="404 Not Found") }}
+{%- endblock head %}
+
+{%- block stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ get_url(path='/404.css', trailing_slash=false, cachebust=true) }}" />
+{%- endblock stylesheets %}
+
+{%- block content %}
+<div class="container">
+  <div class="error-container">
+    <img id="error-image" src="" alt="404 Image" class="error-image">
+    <h1>Oops! 404 Not Found</h1>
+    <p>We're sorry, but the page you are looking for cannot be found.</p>
+    <p>It seems you've hit a dead end.</p>
+    <a href="/" class="btn btn-primary">Go Back Home</a>
+
+  </div>
+</div>
+{%- endblock content %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  window.onload = function() {
+    var images = [
+      './assets/images/4041.png',
+      './assets/images/4042.png',
+      './assets/images/4043.png'    
+  ];
+
+    var randomIndex = Math.floor(Math.random() * images.length);
+    var imageUrl = images[randomIndex];
+    document.getElementById('error-image').src = imageUrl;
+  };
+</script>
+{% endblock scripts %}
