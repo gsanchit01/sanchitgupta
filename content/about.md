@@ -165,11 +165,6 @@ name = "Pytest"
 icon = "/logos/pytest.png"
 label = "Testing Tools"
 
-[[extra.skills]]
-
-name = "Selenium"
-icon = "/logos/selenium.png"
-label = "Testing Tools"
 
 [[extra.skills]]
 
