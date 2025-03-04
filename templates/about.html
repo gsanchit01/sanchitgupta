@@ -109,7 +109,7 @@
           <div class="timeline-element-content">
             <h4>{{ entry.title }}</h4>
             {% if entry.subtitle %}
-            <h5>{{ entry.subtitle }}</h5>
+            <h5><a href={{entry.orgurl}}>{{ entry.subtitle }}</a></h5>
             {% endif %}
             <div>
               {{ entry.content | striptags | markdown(inline=false) | safe }}
