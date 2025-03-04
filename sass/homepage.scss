@@ -12,8 +12,9 @@
 }
 
 /* Ensure scene is positioned properly within the container */
-.scene {
+.scene-container {
   position: relative;
+  z-index: 999;
 }
 
 /* Center sg-picture within scene */

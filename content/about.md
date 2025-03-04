@@ -199,11 +199,11 @@ icon = "/assets/images/ttmc.png"
 disabled = false
 link = "https://github.com/gsanchit01/TTMC"
 calltoaction = "Visit Website"
-background = "#0c3536"
+background = "#cf2121"
 color = "#fff"
 description = """
-A missing child detection system with facial recognition capabilities, Scrap children’s data from Govt. website with Selenium and scrapy and store it in Elasticsearch and then match it with live face recognition software and generate an alert to nearest police station and child parents with the GPS location of the cameras.
-
+•	Developed a **facial recognition-based missing child detection system**, in **Python Django REST Framework** reducing report-to-rescue time by **47%**.  
+•	Scraped child data from **government websites using Selenium and Scrapy**, stored in **Elasticsearch**, and matched it with live face recognition software to generate alerts.
 """
 
 [[extra.top_projects]]
@@ -212,10 +212,11 @@ icon = "/assets/images/pdds.png"
 disabled = true
 link = "javascript:void(0)"
 calltoaction = "Visit Website"
-background = "#1F2544"
+background = "#4470af"
 color = "#fff"
 description = """
-Implemented an AI-powered plant disease detection system, achieving a good disease identification rate. Automation reduced detection and diagnosis time by 84%, optimizing crop management.
+•	Designed an **AI-powered plant disease detection system** in **Python**, identifying **97% of diseases** and improving farm productivity by **35%**.  
+•	Optimized data extraction, analysis, and monitoring with **AI/ML algorithms**, reducing detection time by **84%**.
 """
 
 [[extra.top_projects]]
@@ -224,10 +225,11 @@ icon = "/assets/images/sas.png"
 disabled = false
 link = "https://github.com/gsanchit01/san-sentimentanalyser"
 calltoaction = "Visit Website"
-background = "#4C0805"
+background = "#539521"
 color = "#fff"
 description = """
-Sentimental analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. It allows businesses to identify customer sentiment toward products, brands or services in online conversations and feedback.
+• Sentimental analysis is the **interpretation and classification of emotions (positive, negative and neutral)** within text data using text analysis techniques.  
+• It allows businesses to **identify customer sentiment** toward **products, brands or services** in online conversations and feedback.
 """
 
 ############
@@ -237,71 +239,69 @@ Sentimental analysis is the interpretation and classification of emotions (posit
 [[extra.timeline]]
 title = "Full Stack Web Developer"
 subtitle = "UChamp one"
+orgurl = "https://www.linkedin.com/company/uchampone/"
 date = "February 2022 — April 2022"
 icon = "/assets/icons/webdev.svg"
 background = "#008ff8"
 foreground = "#fff"
 content = """
-• Developed a web interface for hundreds of users, achieving maximum uptime of 99.99%, 
-creating a mobile-responsive design, and scaled the application to accommodate growth 
-from 100 to 20,000 active users in 12 months.  
-• Implemented tools to monitor and analyze web application performance, improving overall 
-web application performance by 40%.
+• Developed a web interface for hundreds of users, achieving **maximum uptime of 99.99%**, creating a **mobile-responsive design**, and scaled the application to accommodate growth from **100 to 20,000 active users** in 12 months.  
+• Implemented tools to **monitor and analyze web application performance**, improving overall web application performance by **40%**.
 """
 
 [[extra.timeline]]
 title = "Backend Developer Intern"
 subtitle = "Solytics Partners Pvt. Ltd."
+orgurl = "https://www.solytics-partners.com/"
 date = "May 2022 — May 2023"
 icon = "/assets/icons/python.svg"
 background = "#36b030"
 foreground = "#fff"
 content = """
-• Improved app performance by 40% by modifying Databases queries and Django templates, 
-resulting in faster loading times and enhanced scalability.  
-• Designed multiple Databasess and structured data to reduce application response time by up 
-to 15% and created automated Testing Tools scripts for faster data analysis and troubleshooting.
+•	Optimized application performance by 40% using **Agile methodologies, Django, Flask, and CI/CD pipelines**.  
+•	Designed and structured **MongoDB and MySQL databases**, reducing application response time by **15%**.  
+•	Implemented **automated testing scripts and Selenium-based web scraping** for faster and more accurate data analysis.
 """
 
 [[extra.timeline]]
 title = "SDE Intern"
 subtitle = "GeeksforGeeks"
+orgurl = "https://www.geeksforgeeks.org/"
 date = "June 2023 — August 2023"
 icon = "/assets/icons/django.svg"
 background = "#008ff8"
 foreground = "#000"
 content = """
-• Developed a robust back-end API for a trading application with a REST Backend Frameworks in Django, 
-implemented authentication using JWT, improved user experience with custom validations, 
-and increased performance by 40%.  
-• Developed automated test cases with Python unit Testing Tools Backend Frameworks, improved test code 
-coverage from 60% to 80%, optimized code logic for improved performance and efficiency.
+•	Developed backend APIs for an educational coding platform using **Django REST Framework, ReactJS, XML and jQuery**, enhancing authentication with **JWT and custom validations**.  
+•	Automated test cases using **Pytest**, increasing code coverage from **50% to 80%** and enhancing overall test efficiency.  
+•	Rapidly iterated on product features by optimizing **API endpoints and database queries**, significantly enhancing performance and user engagement on the **GeeksforGeeks Community Page**.
 """
 
 [[extra.timeline]]
-title = "Backend Developer SDE - I"
+title = "Backend Developer SDE"
 subtitle = "BLKBOX ai"
+orgurl = "https://blkbox.ai/"
 date = "August 2023 - December 2023"
 icon = "/assets/icons/flask.svg"
 background = "#0a8f0b"
 foreground = "#fff"
 content = """
-• Developed and implemented a highly scalable Node JS and Flask microservices architecture 
-for the backend, resulting in a 50% reduction in response time.  
-• Implemented integration of Postgres Databases with Node JS and Flask microservices, 
-leveraging AWS infrastructure and used Redis and celery to improve system speed by 40%
+•	Designed a scalable **Node.js and Flask microservices architecture** and implemented **AWS Lambda**, reducing API response time by **50%**.  
+•	Integrated **Postgres** database with **Node.js and Python** microservices on AWS infrastructure, utilizing **Redis and Celery** to enhance system speed by 40%.  
+•	Led a **microservices deployment** handling **500,000+ transactions daily**, increasing scalability by **35%**.
 """
 
 [[extra.timeline]]
-title = "Backend Developer SDE - II"
-subtitle = "BLKBOX ai"
-date = "December 2023"
+title = "Software Development Engineer (Full-Stack Developer)"
+subtitle = "InspektLabs"
+orgurl = "https://inspektlabs.com/"
+date = "March 2024 - Present"
 icon = "/assets/icons/node.svg"
 background = "#fff"
 foreground = "#fff"
 content = """
-Engineered and implemented a microservices architecture that handled 500,000+ 
-transactions daily, leveraging Node.js and Docker, which increased system scalability by 
-35% and improved deployment efficiency.
+•	Developed and optimized backend services using **NodeJS, Python, Flask, and React JS,** enhancing performance and scalability.  
+•	Deployed **Prometheus and Grafana** logging systems, enabling real-time monitoring and reducing system downtime by 15%.  
+•	Implemented **Auth0 SSO authentication** with **Python and Azure AD**, onboarding **100+ users per week** with seamless access.
 """
 +++
