@@ -1,5 +1,5 @@
 # The URL the site will be built for
-base_url = "https://www.sanchitgupta.tech/"
+base_url = "https://sanchitgupta.vercel.app/"
 
 # The site title and description; used in feeds by default.
 title = "Sanchit Gupta"
