@@ -202,8 +202,7 @@ calltoaction = "Visit Website"
 background = "#cf2121"
 color = "#fff"
 description = """
-•	Developed a **facial recognition-based missing child detection system**, in **Python Django REST Framework** reducing report-to-rescue time by **47%**.  
-•	Scraped child data from **government websites using Selenium and Scrapy**, stored in **Elasticsearch**, and matched it with live face recognition software to generate alerts.
+A facial recognition system designed to locate missing children, reducing rescue time by 47%. By integrating real-time alerts with image processing and data scraping, it empowers faster responses and more efficient child recovery.
 """
 
 [[extra.top_projects]]
@@ -214,9 +213,8 @@ link = "javascript:void(0)"
 calltoaction = "Visit Website"
 background = "#4470af"
 color = "#fff"
-description = """
-•	Designed an **AI-powered plant disease detection system** in **Python**, identifying **97% of diseases** and improving farm productivity by **35%**.  
-•	Optimized data extraction, analysis, and monitoring with **AI/ML algorithms**, reducing detection time by **84%**.
+description = """  
+An AI-powered solution to detect plant diseases, boosting farm productivity by 35%. Through optimized machine learning models, it enables quicker disease identification, reducing detection time by 84%.
 """
 
 [[extra.top_projects]]
@@ -228,8 +226,7 @@ calltoaction = "Visit Website"
 background = "#539521"
 color = "#fff"
 description = """
-• Sentimental analysis is the **interpretation and classification of emotions (positive, negative and neutral)** within text data using text analysis techniques.  
-• It allows businesses to **identify customer sentiment** toward **products, brands or services** in online conversations and feedback.
+Sentimental analysis is the interpretation and classification of emotions (positive, negative and neutral) within text data using text analysis techniques. It allows businesses to identify customer sentiment toward products, brands or services in online conversations and feedback.
 """
 
 ############
@@ -237,17 +234,14 @@ description = """
 ############
 
 [[extra.timeline]]
-title = "Full Stack Web Developer"
+title = "Web Developer Intern"
 subtitle = "UChamp one"
 orgurl = "https://www.linkedin.com/company/uchampone/"
 date = "February 2022 — April 2022"
 icon = "/assets/icons/webdev.svg"
 background = "#008ff8"
 foreground = "#fff"
-content = """
-• Developed a web interface for hundreds of users, achieving **maximum uptime of 99.99%**, creating a **mobile-responsive design**, and scaled the application to accommodate growth from **100 to 20,000 active users** in 12 months.  
-• Implemented tools to **monitor and analyze web application performance**, improving overall web application performance by **40%**.
-"""
+content = """Designed and developed a web interface that supported hundreds of users, ensuring 99.99% uptime. Created a mobile-responsive design and successfully scaled the application to handle the growth from 100 to 20,000 active users within 12 months. Implemented performance monitoring tools, resulting in a 40% improvement in overall web application performance."""
 
 [[extra.timeline]]
 title = "Backend Developer Intern"
@@ -257,11 +251,7 @@ date = "May 2022 — May 2023"
 icon = "/assets/icons/python.svg"
 background = "#36b030"
 foreground = "#fff"
-content = """
-•	Optimized application performance by 40% using **Agile methodologies, Django, Flask, and CI/CD pipelines**.  
-•	Designed and structured **MongoDB and MySQL databases**, reducing application response time by **15%**.  
-•	Implemented **automated testing scripts and Selenium-based web scraping** for faster and more accurate data analysis.
-"""
+content = """Developed and optimized backend modules for enterprise applications, significantly improving performance. Streamlined deployment processes and contributed to data-driven reporting, resulting in faster and more accurate insights."""
 
 [[extra.timeline]]
 title = "SDE Intern"
@@ -271,11 +261,7 @@ date = "June 2023 — August 2023"
 icon = "/assets/icons/django.svg"
 background = "#008ff8"
 foreground = "#000"
-content = """
-•	Developed backend APIs for an educational coding platform using **Django REST Framework, ReactJS, XML and jQuery**, enhancing authentication with **JWT and custom validations**.  
-•	Automated test cases using **Pytest**, increasing code coverage from **50% to 80%** and enhancing overall test efficiency.  
-•	Rapidly iterated on product features by optimizing **API endpoints and database queries**, significantly enhancing performance and user engagement on the **GeeksforGeeks Community Page**.
-"""
+content = """Contributed to the development of backend APIs, enhancing system performance and efficiency. Automated testing processes to increase code coverage and optimized database queries, improving the overall user experience on the platform."""
 
 [[extra.timeline]]
 title = "Backend Developer SDE"
@@ -285,11 +271,7 @@ date = "August 2023 - December 2023"
 icon = "/assets/icons/flask.svg"
 background = "#0a8f0b"
 foreground = "#fff"
-content = """
-•	Designed a scalable **Node.js and Flask microservices architecture** and implemented **AWS Lambda**, reducing API response time by **50%**.  
-•	Integrated **Postgres** database with **Node.js and Python** microservices on AWS infrastructure, utilizing **Redis and Celery** to enhance system speed by 40%.  
-•	Led a **microservices deployment** handling **500,000+ transactions daily**, increasing scalability by **35%**.
-"""
+content = """Developed and scaled microservices, enhancing system resilience and modularity. Contributed to the growth of a high-volume distributed system, improving scalability and transaction handling. Focused on optimizing data models and enhancing API performance to meet high-demand user needs."""
 
 [[extra.timeline]]
 title = "Software Development Engineer (Full-Stack Developer)"
@@ -299,9 +281,5 @@ date = "March 2024 - Present"
 icon = "/assets/icons/node.svg"
 background = "#fff"
 foreground = "#fff"
-content = """
-•	Developed and optimized backend services using **NodeJS, Python, Flask, and React JS,** enhancing performance and scalability.  
-•	Deployed **Prometheus and Grafana** logging systems, enabling real-time monitoring and reducing system downtime by 15%.  
-•	Implemented **Auth0 SSO authentication** with **Python and Azure AD**, onboarding **100+ users per week** with seamless access.
-"""
+content = """Led the design and optimization of backend services, significantly improving system performance and scalability. Spearheaded the implementation of real-time observability tools, ensuring smooth monitoring and efficient operations. Played a key role in integrating secure authentication systems, enabling streamlined user onboarding."""
 +++

@@ -86,7 +86,7 @@
             {%- endif %}
             <h4>{{ top_project.name }}</h4>
             <div>
-              {{ top_project.description | striptags | markdown(inline=false) | safe }}
+              <p>{{ top_project.description | striptags | markdown(inline=false) | safe }}</p>
             </div>
           </div>
           <div class="card-actions">
