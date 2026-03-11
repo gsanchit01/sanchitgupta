@@ -1,9 +1,17 @@
 [build]
 publish = "public"
-command = "zola build"
+command = "cd netlify/functions && npm install && cd ../.. && zola build"
 
 [build.environment]
 ZOLA_VERSION = "0.17.2"
+
+[functions]
+directory = "netlify/functions"
+
+[dev]
+command = "/tmp/zola serve"
+targetPort = 1111
+port = 8888
 
 [context.deploy-preview]
 command = "zola build --base-url $DEPLOY_PRIME_URL"

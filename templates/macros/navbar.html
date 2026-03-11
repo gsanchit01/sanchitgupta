@@ -1,7 +1,7 @@
 {%- macro navbar_script() %}
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // {# https://css-tricks.com/using-intersectionobserver-to-check-if-page-scrolled-past-certain-point/ #}
+    // Sticky navbar
     const navbar = document.querySelector("nav");
     const observer = new IntersectionObserver(entries => {
       if (entries[0].boundingClientRect.y < 0) {
@@ -12,11 +12,10 @@
     });
     observer.observe(document.querySelector("#navbar-trigger"));
 
+    // Mobile drawer
     const drawer = document.getElementById("navbar-drawer");
     const drawerOpenBtn = document.getElementById("drawer-open");
-    const drawerCloseBtn = document.getElementById("drawer-close");
-
-    drawerOpenBtn.addEventListener("click", () => {
+    document.getElementById("drawer-open").addEventListener("click", () => {
       drawer.showModal();
     });
     document.querySelectorAll("#drawer-close, #navbar-drawer a").forEach(element => {
@@ -24,6 +23,7 @@
         drawer.close();
       });
     });
+
   });
 </script>
 {%- endmacro %}
@@ -35,22 +35,24 @@
       {{ load_data(path="/assets/icons/hamburger-menu.svg") | safe }}
     </button>
     <a href="{{ get_url(path='/') }}">
-    {% set profile_picture = resize_image(path=config.extra.logo, width=44, height=30, op="fill", format="webp") %}
-    <img class="profile-picture" src="{{ profile_picture.url }}" alt="Profile image of" />
+    {% set profile_picture = resize_image(path=config.extra.logo, width=40, height=40, op="fit", format="webp") %}
+    <img class="navbar-logo" src="{{ profile_picture.url }}" alt="Logo of {{ config.title }}" />
     </a>
 
   </div>
-  <div class="navbar-drawer-links">
-    {%- for link in config.extra.links %}
-    {%- if link.path is matching("^http[s]?://") %}
-    {%- set href = link.path %}
-    {%- else %}
-    {%- set href = get_url(path=link.path) %}
-    {%- endif %}
-    <a class="button--big" href="{{ href }}">
-      {{ link.name }}
-    </a>
-    {%- endfor %}
+  <div>
+    <div class="navbar-drawer-links">
+      {%- for link in config.extra.links %}
+      {%- if link.path is matching("^http[s]?://") %}
+      {%- set href = link.path %}
+      {%- else %}
+      {%- set href = get_url(path=link.path) %}
+      {%- endif %}
+      <a class="nav-link" href="{{ href }}">
+        {{ link.name }}
+      </a>
+      {%- endfor %}
+    </div>
   </div>
 </nav>
 <dialog id="navbar-drawer">
@@ -64,7 +66,7 @@
     {%- else %}
     {%- set href = get_url(path=link.path) %}
     {%- endif %}
-    <a class="button--big" href="{{ href }}">
+    <a class="nav-link" href="{{ href }}">
       {{ link.name }}
     </a>
     {%- endfor %}

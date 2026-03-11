@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /home/froster/Desktop/Work/Personal/sanchitgupta -not -path *.git* -type d)",
+      "Bash(grep -n \"@import\\\\|@use\" /home/froster/Desktop/Work/Personal/sanchitgupta/sass/*.scss)",
+      "Bash(grep -n \"\\\\.svg$\" /home/froster/Desktop/Work/Personal/sanchitgupta/templates/about.html)",
+      "Bash(zola --version)",
+      "Bash(sudo snap:*)",
+      "Bash(wget -q https://github.com/getzola/zola/releases/download/v0.17.2/zola-v0.17.2-x86_64-unknown-linux-gnu.tar.gz -O /tmp/zola.tar.gz)",
+      "Bash(tar -xzf /tmp/zola.tar.gz -C /tmp/)",
+      "Bash(/tmp/zola --version)",
+      "Bash(/tmp/zola build:*)",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//home/froster/Desktop/Work/Personal/sanchitgupta/static/assets/icons/**)",
+      "Bash(done)",
+      "Bash(/home/froster/Desktop/Work/Personal/sanchitgupta/static/assets/icons/node.svg:*)",
+      "Bash(/home/froster/Desktop/Work/Personal/sanchitgupta/static/assets/icons/webdev.svg:*)",
+      "Bash(/home/froster/Desktop/Work/Personal/sanchitgupta/static/assets/icons/flask.svg:*)",
+      "Bash(grep -E \"\\\\.\\(js|css\\)$\")",
+      "Bash(npm install:*)",
+      "Bash(sudo npm:*)",
+      "Read(//tmp/**)",
+      "Bash(curl -sL https://github.com/getzola/zola/releases/download/v0.19.2/zola-v0.19.2-x86_64-unknown-linux-gnu.tar.gz)",
+      "Bash(tar xz:*)",
+      "Bash(curl -s -X POST http://localhost:8888/.netlify/functions/send-email -H \"Content-Type: application/json\" -d '{\"\"\"\"name\"\"\"\":\"\"\"\"Test User\"\"\"\",\"\"\"\"email\"\"\"\":\"\"\"\"test@example.com\"\"\"\",\"\"\"\"subject\"\"\"\":\"\"\"\"Test\"\"\"\",\"\"\"\"message\"\"\"\":\"\"\"\"Hello from local test\"\"\"\"}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8888/.netlify/functions/send-email -X POST -H \"Content-Type: application/json\" -d '{\"\"name\"\":\"\"t\"\",\"\"email\"\":\"\"t@t.com\"\",\"\"subject\"\":\"\"t\"\",\"\"message\"\":\"\"t\"\"}')",
+      "Bash(lsof -ti:8888,19191,1111)",
+      "Bash(xargs kill:*)"
+    ]
+  }
+}

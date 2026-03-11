@@ -1,11 +1,46 @@
 @use "mixins";
 @use "timeline";
-@import "./_tooltips.scss";
+@use "tooltips";
 
-.timeline-element-content{
-  background: #00000017;
+/* ── Resume download button ── */
+.resume-btn {
+  position: relative;
+  background: linear-gradient(270deg, rgba(56,189,248,0.12), rgba(129,140,248,0.12), rgba(167,139,250,0.12), rgba(56,189,248,0.12));
+  background-size: 300% 300%;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  animation: gradientShift 5s ease infinite;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(270deg, #38bdf8, #818cf8, #a78bfa, #38bdf8);
+    background-size: 300% 300%;
+    animation: gradientShift 5s ease infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: linear-gradient(270deg, rgba(56,189,248,0.22), rgba(129,140,248,0.22), rgba(167,139,250,0.22), rgba(56,189,248,0.22));
+    background-size: 300% 300%;
+    animation: gradientShift 5s ease infinite;
+    box-shadow: 0 0 24px rgba(56, 189, 248, 0.3), 0 0 48px rgba(129, 140, 248, 0.15);
+    transform: translateY(-2px);
+    opacity: 1;
+  }
+
+  color: #c4b5fd;
+  font-weight: 600;
 }
 
+/* ── About hero splash ── */
 .splash {
   min-height: 100vh;
   display: flex;
@@ -13,100 +48,177 @@
   align-items: center;
   flex-direction: column;
   text-align: center;
+  padding: 80px 20px 20px;
+  position: relative;
 
-  /* TODO container styles */
   .profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 100px;
+    width: clamp(110px, 20vw, 156px);
+    height: clamp(110px, 20vw, 156px);
+    border-radius: 50%;
+    border: 3px solid transparent;
+    background:
+      linear-gradient(var(--profile-inner-bg), var(--profile-inner-bg)) padding-box,
+      linear-gradient(135deg, #38bdf8, #818cf8) border-box;
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.25), 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 0 60px rgba(56, 189, 248, 0.4), 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
   }
 
   h1 {
     font-family: "Nunito", "Roboto", "Helvetica", "Arial", sans-serif;
-    font-size: 4rem;
+    font-size: clamp(2.4rem, 8vw, 4rem);
     font-weight: 300;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: clamp(1rem, 3vw, 1.3rem);
     font-weight: 400;
+    color: var(--splash-subtitle);
+    letter-spacing: 0.05em;
+    margin: 0;
+    padding: 0 16px;
   }
 
-  .socials {
-    margin-top: 32px;
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
+  /* Clickable scroll-down arrow */
+  a.below-arrow-link {
+    position: absolute;
+    bottom: 16px;
+    display: inline-flex;
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
 
-    svg {
-      width: 24px;
-      fill: #fff;
+    &:hover {
+      opacity: 1;
+      transform: translateY(4px);
+    }
+
+    img {
+      width: clamp(56px, 10vw, 80px);
+      height: clamp(56px, 10vw, 80px);
     }
   }
 }
 
+/* ── Content sections ── */
 .section {
-  background: #fff;
-  color: #000c;
-  padding-top: 24px;
-  padding-bottom: 24px;
-  @include mixins.box-shadow;
+  background: var(--section-bg);
+  color: var(--section-text);
+  padding-top: 32px;
+  padding-bottom: 40px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  border-top: 1px solid var(--navbar-border);
+  transition: background 0.3s ease, color 0.3s ease;
 
   h3 {
-    margin: 20px 0;
+    margin: 16px 0 24px;
     text-align: center;
-    font-size: 1.5rem;
-    font-weight: 500;
-    line-height: 1.334;
-    letter-spacing: 0em;
+    font-size: clamp(1.1rem, 3vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--section-h3);
+    position: relative;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
   }
 }
 
+/* ── Section title headers ── */
 .section-title {
-  padding: 75px 0;
-  color: #fff;
+  padding: clamp(40px, 8vw, 80px) 16px;
+  color: var(--section-title-text);
   display: flex;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 
   h2 {
     margin: 0;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
-    font-size: 2.125rem;
-    font-weight: 400;
-    line-height: 1.235;
-    letter-spacing: 0.00735em;
+    &::after {
+      content: "";
+      display: block;
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      margin: 14px auto 0;
+      border-radius: 2px;
+    }
   }
 }
 
+/* ── About me text ── */
 #about-me {
   font-weight: 300;
   padding: 1rem 0;
-  font-size: 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  line-height: 1.8;
 }
 
+/* ── Project cards ── */
 .card {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  border-radius: 4px;
-  @include mixins.box-shadow;
+  margin: 8px;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.2);
+  }
 
   .card-content {
-    padding: 16px;
-
+    padding: 24px 20px 16px;
     flex-grow: 1;
   }
 
   .card-actions {
     display: flex;
-    padding: 8px;
+    padding: 12px 16px;
     align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    a {
+      color: inherit;
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.07);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.4);
+        box-shadow: none;
+      }
+    }
   }
 }
 
@@ -115,57 +227,122 @@
   flex-flow: row wrap;
   justify-content: center;
   align-content: center;
+  gap: 4px;
 
   .card {
-    width: clamp(50px, 100%, 350px);
+    width: clamp(260px, 45%, 340px);
+
+    @media (max-width: 599px) {
+      width: 100%;
+      margin: 6px 0;
+    }
 
     img {
-      width: 80px;
-      height: 80px;
-      margin: 0 auto 10px auto;
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 12px auto;
       display: block;
+      border-radius: 12px;
     }
 
     h4 {
-      font-size: 1.25rem;
-      font-weight: 500;
-      line-height: 1.6;
-      letter-spacing: 0.0075em;
-      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.5;
+      margin: 0 0 6px;
+    }
+
+    p {
+      font-size: 0.875rem;
+      opacity: 0.85;
     }
   }
 }
 
+/* ── Skills ── */
 .skills {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* Center the items along the main axis */
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 0;
 }
 
 .skill {
-  width: 33.33%; /* Each skill occupies one-third of the container */
-  box-sizing: border-box; /* Include padding and border in the width */
-  padding: 20px 10px 10px 10px; /* Adjust as needed */
+  width: calc(33.33% - 8px);
+  box-sizing: border-box;
+  padding: 16px 8px 12px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content horizontally */
+  align-items: center;
+  border-radius: 12px;
+  background: var(--skill-card-bg);
+  border: 1px solid var(--skill-card-border);
+  transition: all 0.3s ease;
+  cursor: default;
+
+  @media (max-width: 599px) {
+    width: calc(50% - 8px);
+  }
+
+  @media (max-width: 360px) {
+    width: 100%;
+  }
+
+  &:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.1);
+  }
 }
 
 .skill .skill-icon {
   display: flex;
-  align-items: center; /* Center the icon */
-  margin: auto; /* Center the icon horizontally */
+  align-items: center;
+  margin: auto;
+  width: clamp(40px, 8vw, 52px);
+  height: clamp(40px, 8vw, 52px);
+  object-fit: contain;
 }
 
 .skill .skill-name {
-  text-align: center; /* Center the skill name */
-  font-weight: bold; /* Make the skill name bold */
-  font-size: 18px; /* Adjust font size as needed */
-  margin-top: 10px; /* Add some spacing between the icon and the skill name */
-  color: #333; /* Set the text color */
-  // text-transform: uppercase; /* Convert the text to uppercase */
-  letter-spacing: 1px; /* Add letter spacing for better readability */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle text shadow */
+  text-align: center;
+  font-weight: 600;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  margin-top: 8px;
+  color: var(--skill-name-color);
+  letter-spacing: 0.5px;
 }
 
+/* ── Timeline override for dark cards ── */
+.timeline-element-content {
+  background: var(--timeline-card-bg) !important;
+  color: var(--timeline-card-text);
+  border: 1px solid var(--timeline-card-border);
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 
+  &::before {
+    background: var(--timeline-arrow-bg) !important;
+    border-color: var(--timeline-card-border) !important;
+  }
+
+  h4 {
+    color: var(--timeline-card-text);
+  }
+
+  h5 a {
+    color: var(--timeline-h5-color);
+  }
+
+  p {
+    color: var(--timeline-card-text);
+    opacity: 0.8;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  }
+}

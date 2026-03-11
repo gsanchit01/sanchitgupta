@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <radialGradient id="p-bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a1e1a"/>
+      <stop offset="100%" stop-color="#060e0c"/>
+    </radialGradient>
+    <radialGradient id="p-glow" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p-leaf" x1="40%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#34d399" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#059669" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="p-glow-filter">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <clipPath id="p-clip">
+      <rect x="0" y="0" width="200" height="200" rx="20"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#p-clip)">
+    <!-- Background -->
+    <rect width="200" height="200" rx="20" fill="url(#p-bg)"/>
+    <ellipse cx="100" cy="90" rx="90" ry="90" fill="url(#p-glow)"/>
+
+    <!-- Subtle hex grid pattern -->
+    <g opacity="0.06" stroke="#34d399" stroke-width="0.6">
+      <path d="M20 30 L30 12 L50 12 L60 30 L50 48 L30 48 Z"/>
+      <path d="M60 30 L70 12 L90 12 L100 30 L90 48 L70 48 Z"/>
+      <path d="M100 30 L110 12 L130 12 L140 30 L130 48 L110 48 Z"/>
+      <path d="M140 30 L150 12 L170 12 L180 30 L170 48 L150 48 Z"/>
+      <path d="M0 66 L10 48 L30 48 L40 66 L30 84 L10 84 Z"/>
+      <path d="M40 66 L50 48 L70 48 L80 66 L70 84 L50 84 Z"/>
+      <path d="M80 66 L90 48 L110 48 L120 66 L110 84 L90 84 Z"/>
+      <path d="M120 66 L130 48 L150 48 L160 66 L150 84 L130 84 Z"/>
+      <path d="M160 66 L170 48 L190 48 L200 66 L190 84 L170 84 Z"/>
+    </g>
+
+    <!-- Leaf shape - detailed -->
+    <path d="M100 170 C100 170 48 145 42 100 C36 60 62 28 100 24 C138 28 164 60 158 100 C152 145 100 170 100 170 Z"
+          fill="#0d2218" stroke="url(#p-leaf)" stroke-width="2"/>
+
+    <!-- Leaf center vein -->
+    <path d="M100 24 C100 24 100 170 100 170" stroke="#34d399" stroke-width="1.5" opacity="0.6"/>
+
+    <!-- Leaf side veins -->
+    <g stroke="#34d399" stroke-width="1" opacity="0.4" stroke-linecap="round">
+      <path d="M100 50 Q82 58 68 68"/>
+      <path d="M100 65 Q78 72 62 80"/>
+      <path d="M100 80 Q76 86 58 92"/>
+      <path d="M100 95 Q76 100 60 104"/>
+      <path d="M100 110 Q78 114 64 118"/>
+      <path d="M100 125 Q82 128 70 132"/>
+      <path d="M100 50 Q118 58 132 68"/>
+      <path d="M100 65 Q122 72 138 80"/>
+      <path d="M100 80 Q124 86 142 92"/>
+      <path d="M100 95 Q124 100 140 104"/>
+      <path d="M100 110 Q122 114 136 118"/>
+      <path d="M100 125 Q118 128 130 132"/>
+    </g>
+
+    <!-- Disease spot 1 - with detection overlay -->
+    <circle cx="76" cy="82" r="10" fill="#7f1d1d" opacity="0.75"/>
+    <circle cx="76" cy="82" r="6" fill="#dc2626" opacity="0.5"/>
+    <circle cx="76" cy="82" r="3" fill="#fca5a5" opacity="0.6"/>
+    <!-- Detection box 1 -->
+    <rect x="60" y="66" width="32" height="32" rx="3" stroke="#f87171" stroke-width="1.5" stroke-dasharray="4 2" fill="none"/>
+    <path d="M60 66 L64 66" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M60 66 L60 70" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M92 66 L88 66" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M92 66 L92 70" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M60 98 L60 94" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M60 98 L64 98" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M92 98 L92 94" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M92 98 L88 98" stroke="#f87171" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Disease spot 2 - smaller -->
+    <circle cx="122" cy="72" r="7" fill="#78350f" opacity="0.7"/>
+    <circle cx="122" cy="72" r="4" fill="#d97706" opacity="0.5"/>
+    <rect x="110" y="60" width="24" height="24" rx="3" stroke="#fbbf24" stroke-width="1.2" stroke-dasharray="3 2" fill="none"/>
+
+    <!-- Disease spot 3 -->
+    <circle cx="108" cy="118" r="6" fill="#7f1d1d" opacity="0.65"/>
+    <circle cx="108" cy="118" r="3.5" fill="#ef4444" opacity="0.45"/>
+    <rect x="98" y="108" width="20" height="20" rx="2" stroke="#f87171" stroke-width="1" stroke-dasharray="3 2" fill="none"/>
+
+    <!-- AI analysis connector line -->
+    <line x1="92" y1="76" x2="138" y2="52" stroke="#38bdf8" stroke-width="1" opacity="0.5" stroke-dasharray="3 2"/>
+    <circle cx="138" cy="52" r="3" fill="#38bdf8" opacity="0.8"/>
+
+    <!-- Probability card -->
+    <rect x="130" y="38" width="58" height="38" rx="6" fill="#0d2218" stroke="#38bdf8" stroke-width="1" fill-opacity="0.95"/>
+    <text x="159" y="52" text-anchor="middle" font-family="monospace" font-size="7" fill="#34d399">BLIGHT</text>
+    <rect x="136" y="55" width="34" height="4" rx="2" fill="#1a3a28"/>
+    <rect x="136" y="55" width="28" height="4" rx="2" fill="#34d399" opacity="0.8"/>
+    <text x="159" y="67" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#38bdf8">84% conf.</text>
+
+    <!-- Microscope icon (top right) -->
+    <g transform="translate(146, 140)" opacity="0.5">
+      <circle cx="18" cy="14" r="10" stroke="#38bdf8" stroke-width="1.5" fill="none"/>
+      <circle cx="18" cy="14" r="5" stroke="#34d399" stroke-width="1" fill="none"/>
+      <line x1="18" y1="24" x2="18" y2="36" stroke="#38bdf8" stroke-width="1.5"/>
+      <line x1="10" y1="36" x2="26" y2="36" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="4" y1="6" x2="12" y2="6" stroke="#38bdf8" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- Progress bars at bottom -->
+    <g transform="translate(12, 158)">
+      <text x="0" y="8" font-family="monospace" font-size="6.5" fill="#34d399" opacity="0.7">Blight</text>
+      <rect x="32" y="2" width="60" height="5" rx="2.5" fill="#0d2218"/>
+      <rect x="32" y="2" width="50" height="5" rx="2.5" fill="#34d399" opacity="0.7"/>
+      <text x="96" y="8" font-family="monospace" font-size="6.5" fill="#34d399" opacity="0.7">84%</text>
+
+      <text x="0" y="20" font-family="monospace" font-size="6.5" fill="#fbbf24" opacity="0.7">Rust</text>
+      <rect x="32" y="14" width="60" height="5" rx="2.5" fill="#0d2218"/>
+      <rect x="32" y="14" width="22" height="5" rx="2.5" fill="#fbbf24" opacity="0.7"/>
+      <text x="96" y="20" font-family="monospace" font-size="6.5" fill="#fbbf24" opacity="0.7">37%</text>
+
+      <text x="0" y="32" font-family="monospace" font-size="6.5" fill="#38bdf8" opacity="0.7">Healthy</text>
+      <rect x="32" y="26" width="60" height="5" rx="2.5" fill="#0d2218"/>
+      <rect x="32" y="26" width="8" height="5" rx="2.5" fill="#38bdf8" opacity="0.7"/>
+      <text x="96" y="32" font-family="monospace" font-size="6.5" fill="#38bdf8" opacity="0.7">12%</text>
+    </g>
+  </g>
+</svg>

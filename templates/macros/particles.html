@@ -3,31 +3,34 @@
   function setupParticlesBackground() {
     tsParticles.load("tsparticles", {
       particles: {
+        color: { value: ["#38bdf8", "#818cf8", "#a78bfa"] },
         links: {
           enable: true,
-          distance: 100,
-          opacity: 0.5,
+          distance: 120,
+          opacity: 0.2,
+          color: "#38bdf8",
+          width: 1,
         },
         number: {
           density: {
             enable: true,
-            value_area: 800,
+            value_area: 700,
           },
-          value: 55,
+          value: 100,
         },
         size: {
-          value: 3,
+          value: { min: 1, max: 3 },
         },
         move: {
           direction: 'none',
           enable: true,
           outMode: 'bounce',
-          random: false,
-          speed: 2,
+          random: true,
+          speed: 1.2,
           straight: false,
         },
         opacity: {
-          value: 0.5,
+          value: { min: 0.1, max: 0.6 },
         },
       },
       retina_detect: true,

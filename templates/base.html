@@ -6,8 +6,12 @@
     {%- block head %}
     {%- include "partials/head.html" %}
     {%- block stylesheets %}
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Nunito&amp;display=swap" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ get_url(path='/common.css', trailing_slash=false, cachebust=true) }}" />
+    <link rel="stylesheet" href="{{ get_url(path='/chat.css', trailing_slash=false, cachebust=true) }}" />
+
     {%- endblock stylesheets %}
     {%- endblock head %}
   </head>
@@ -64,5 +68,316 @@
     {%- block scripts %}
     {{- macros_navbar::navbar_script() }}
     {%- endblock scripts %}
+
+    <!-- Floating chat widget -->
+    <div class="chat-widget" id="chat-widget">
+      <div class="chat-panel" id="chat-panel">
+        <div class="chat-panel-header">
+          <div class="chat-panel-title">
+            <span class="chat-status-dot"></span>
+            Ask me anything
+          </div>
+          <div class="chat-header-actions">
+            <button class="chat-header-btn" id="chat-clear" aria-label="Clear chat" title="Clear chat">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                <path d="M10 11v6"></path><path d="M14 11v6"></path>
+                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+              </svg>
+            </button>
+            <button class="chat-header-btn chat-close" id="chat-close" aria-label="Close chat" title="Close">✕</button>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-message chat-message--ai">
+            <div class="chat-bubble">Hey! Ask me about Sanchit's projects, skills, or experience.</div>
+          </div>
+          <div class="chat-suggestions" id="chat-suggestions">
+            <button class="chat-suggestion-btn" data-msg="What are Sanchit's top projects?">Top projects</button>
+            <button class="chat-suggestion-btn" data-msg="What is Sanchit's tech stack?">Tech stack</button>
+            <button class="chat-suggestion-btn" data-msg="Tell me about Sanchit's work experience.">Work experience</button>
+            <button class="chat-suggestion-btn" data-msg="How can I contact Sanchit?">Contact</button>
+            <button class="chat-suggestion-btn" data-msg="Who is Sanchit?">About Sanchit</button>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <form class="chat-input-form" id="chat-form">
+            <textarea id="chat-input" class="chat-input" placeholder="Ask something…" rows="1" autocomplete="off"></textarea>
+            <button type="submit" class="chat-send-btn" aria-label="Send">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <button class="chat-toggle" id="chat-toggle" aria-label="Open chat">
+        <svg id="chat-icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <svg id="chat-icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <script>
+    (function () {
+      const panel    = document.getElementById('chat-panel');
+      const toggle   = document.getElementById('chat-toggle');
+      const closeBtn = document.getElementById('chat-close');
+      const clearBtn = document.getElementById('chat-clear');
+      const form     = document.getElementById('chat-form');
+      const input    = document.getElementById('chat-input');
+      const messages     = document.getElementById('chat-messages');
+      const iconOpen     = document.getElementById('chat-icon-open');
+      const iconClose    = document.getElementById('chat-icon-close');
+
+      function openPanel() {
+        panel.classList.add('is-open');
+        iconOpen.style.display  = 'none';
+        iconClose.style.display = '';
+        input.focus();
+      }
+      function closePanel() {
+        panel.classList.remove('is-open');
+        iconOpen.style.display  = '';
+        iconClose.style.display = 'none';
+      }
+
+      toggle.addEventListener('click', () => panel.classList.contains('is-open') ? closePanel() : openPanel());
+      closeBtn.addEventListener('click', closePanel);
+
+      clearBtn.addEventListener('click', () => {
+        messages.innerHTML = `
+          <div class="chat-message chat-message--ai">
+            <div class="chat-bubble">Hey! Ask me about Sanchit's projects, skills, or experience.</div>
+          </div>`;
+        addSuggestions();
+      });
+
+      function scrollBottom() { messages.scrollTop = messages.scrollHeight; }
+
+      function addBubble(role, text) {
+        const wrap = document.createElement('div');
+        wrap.className = `chat-message chat-message--${role === 'user' ? 'user' : 'ai'}`;
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.textContent = text;
+        wrap.appendChild(bubble);
+        messages.appendChild(wrap);
+        scrollBottom();
+        return wrap;
+      }
+
+      function addTyping() {
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-message chat-message--ai chat-message--typing';
+        wrap.innerHTML = '<div class="chat-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>';
+        messages.appendChild(wrap);
+        scrollBottom();
+        return wrap;
+      }
+
+      function addContactForm() {
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-message chat-message--ai';
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        const contactForm = document.createElement('form');
+        contactForm.className = 'chat-contact-form';
+        contactForm.id = 'chat-inline-form';
+        contactForm.innerHTML =
+          '<input type="text" name="name" placeholder="Your name" required />' +
+          '<input type="email" name="email" placeholder="your@email.com" required />' +
+          '<input type="text" name="subject" placeholder="Subject" required />' +
+          '<textarea name="message" placeholder="Your message…" rows="3" required></textarea>' +
+          '<button type="submit" class="chat-form-submit">Send Message</button>';
+        bubble.appendChild(contactForm);
+        wrap.appendChild(bubble);
+        messages.appendChild(wrap);
+        scrollBottom();
+
+        wrap.querySelector('#chat-inline-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = wrap.querySelector('.chat-form-submit');
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          const fd = new FormData(e.target);
+          const logEntry = {
+            time:    new Date().toISOString(),
+            name:    fd.get('name'),
+            email:   fd.get('email'),
+            subject: fd.get('subject'),
+            message: fd.get('message'),
+            status:  null,
+          };
+          try {
+            const res = await fetch('/.netlify/functions/send-email', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name:    logEntry.name,
+                email:   logEntry.email,
+                subject: logEntry.subject,
+                message: logEntry.message,
+              }),
+            });
+            if (!res.ok) throw new Error(await res.text());
+            logEntry.status = 'sent';
+            wrap.querySelector('.chat-bubble').innerHTML = "Got it! Sanchit will get back to you soon ✓";
+          } catch (err) {
+            logEntry.status = 'failed';
+            logEntry.error  = String(err);
+            btn.disabled = false;
+            btn.textContent = 'Send Message';
+          } finally {
+            const logs = JSON.parse(localStorage.getItem('chat_contact_logs') || '[]');
+            logs.push(logEntry);
+            localStorage.setItem('chat_contact_logs', JSON.stringify(logs));
+          }
+        });
+      }
+
+      const DATA = {
+        projects: `Sanchit's top projects:\n\n• Track the Missing Child (TTMC) — Facial recognition to locate missing children; reduced rescue time by 47%.\n  github.com/gsanchit01/TTMC\n\n• Plant Disease Detection (PDDS) — AI-powered detection; boosted farm productivity by 35%.\n\n• Sentimental Analysis (SAS) — Classifies emotions in text for businesses.\n  github.com/gsanchit01/san-sentimentanalyser`,
+        skills: `Sanchit's tech stack:\n\n• Languages: Python, Java, C, C++, Ruby, JavaScript\n• Backend: Django, Flask, Node.js, Spring Boot\n• Frontend: React.js, Angular.js\n• Databases: PostgreSQL, Elasticsearch, MySQL, MongoDB\n• Cloud: AWS, Azure, GCP\n• CI/CD: Jenkins, Git, Docker\n• Testing: JMeter, Pytest, Selenium`,
+        experience: `Work experience:\n\n1. SDE Full-Stack – InspektLabs (Mar 2024–Present)\n2. Backend SDE – BLKBOX AI (Aug–Dec 2023)\n3. SDE Intern – GeeksforGeeks (Jun–Aug 2023)\n4. Backend Intern – Solytics Partners (May 2022–May 2023)\n5. Web Dev Intern – UChamp One (Feb–Apr 2022)\n   Scaled from 100 → 20,000 users in 12 months`,
+        contact: `You can reach Sanchit at:\n\n• Email: sanchitgupta0101@gmail.com\n• LinkedIn: linkedin.com/in/aboutsanchit\n• GitHub: github.com/gsanchit01\n• Instagram: @sanchitgupta0101`,
+        about: `Sanchit Gupta is a Full-Stack SDE from India who loves programming, gaming, and learning new things. Currently at InspektLabs (Mar 2024–Present), leading backend service design and real-time observability tools.`,
+      };
+
+      function getResponse(text) {
+        const q = text.toLowerCase();
+        if (/project|ttmc|pdds|sas|missing child|plant|sentiment/.test(q)) return DATA.projects;
+        if (/skill|tech|stack|language|framework|tool|python|java|node|django|react|aws|docker/.test(q)) return DATA.skills;
+        if (/work|experience|job|intern|company|inspekt|blkbox|geeksforgeeks|solytics|uchamp/.test(q)) return DATA.experience;
+        if (/contact|email|linkedin|github|reach|instagram|discord/.test(q)) return DATA.contact;
+        if (/who|about|sanchit|yourself|introduce/.test(q)) return DATA.about;
+        return null;
+      }
+
+      const SUGGESTIONS = [
+        { label: 'Top projects',   msg: 'What are Sanchit\'s top projects?' },
+        { label: 'Tech stack',     msg: 'What is Sanchit\'s tech stack?' },
+        { label: 'Work experience',msg: 'Tell me about Sanchit\'s work experience.' },
+        { label: 'Contact',        msg: 'How can I contact Sanchit?' },
+        { label: 'About Sanchit',  msg: 'Who is Sanchit?' },
+      ];
+
+      const usedSuggestions = new Set();
+
+      function addSuggestions() {
+        const remaining = SUGGESTIONS.filter(s => !usedSuggestions.has(s.msg));
+        if (!remaining.length) return;
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-suggestions';
+        remaining.forEach(({ label, msg }) => {
+          const btn = document.createElement('button');
+          btn.className = 'chat-suggestion-btn';
+          btn.textContent = label;
+          btn.addEventListener('click', () => {
+            wrap.remove();
+            send(msg);
+          });
+          wrap.appendChild(btn);
+        });
+        messages.appendChild(wrap);
+        scrollBottom();
+      }
+
+      // Wire up initial static suggestions
+      document.querySelectorAll('.chat-suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          btn.closest('.chat-suggestions').remove();
+          send(btn.dataset.msg);  // send() will add to usedSuggestions
+        });
+      });
+
+      async function send(text) {
+        if (!text.trim()) return;
+        usedSuggestions.add(text);
+        // Remove any existing loose suggestion row
+        messages.querySelectorAll('.chat-suggestions').forEach(el => el.remove());
+        addBubble('user', text);
+        const typing = addTyping();
+        await new Promise(r => setTimeout(r, 500));
+        typing.remove();
+        const reply = getResponse(text);
+        if (reply) {
+          addBubble('ai', reply);
+          addSuggestions();
+        } else {
+          addBubble('ai', "I'm not sure about that. Want to send Sanchit a message directly?");
+          addContactForm();
+        }
+      }
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        input.value = '';
+        input.style.height = 'auto';
+        send(text);
+      });
+
+      input.addEventListener('input', () => {
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 100) + 'px';
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          form.dispatchEvent(new Event('submit'));
+        }
+      });
+    })();
+    </script>
+
+    <script>
+    // Scroll-triggered reveal animations
+    (function () {
+      const SELECTORS = [
+        '.reveal',
+        '.skill',
+        '.card',
+        '.vertical-timeline-element',
+        '.contact-item',
+        '.section-title h2',
+      ];
+
+      const targets = document.querySelectorAll(SELECTORS.join(','));
+      if (!targets.length) return;
+
+      // Stagger siblings of the same parent
+      const staggered = new Set();
+      targets.forEach(el => {
+        const parent = el.parentElement;
+        if (!staggered.has(parent)) {
+          staggered.add(parent);
+          const siblings = parent.querySelectorAll(SELECTORS.join(','));
+          siblings.forEach((sib, i) => {
+            sib.style.transitionDelay = (i * 0.07) + 's';
+          });
+        }
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      targets.forEach(el => observer.observe(el));
+    })();
+    </script>
   </body>
 </html>

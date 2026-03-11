@@ -3,7 +3,7 @@ base_url = "https://sanchitgupta.vercel.app/"
 
 # The site title and description; used in feeds by default.
 title = "Sanchit Gupta"
-description = "Hey, I'm Sanchit Gupta from India. I love programming, gameing and learning new things!"
+description = "Hey, I'm Sanchit Gupta from India. I love programming, gaming and learning new things!"
 
 # The default language; used in feeds.
 default_language = "en"
@@ -65,7 +65,7 @@ value = "g.froster"
 link = "https://discord.com/users/451054079813091328"
 [[extra.footer.socials]]
 name = "linkedin"
-label = "Likedin"
+label = "LinkedIn"
 value = "in/aboutsanchitgupta"
 link = "https://www.linkedin.com/in/aboutsanchit/"
 [[extra.footer.socials]]
@@ -80,6 +80,9 @@ path = "/"
 [[extra.links]]
 name = "About"
 path = "/about"
+[[extra.links]]
+name = "Contact"
+path = "/contact"
 [[extra.links]]
 name = "Source"
 path = "https://github.com/gsanchit01/sanchitgupta"

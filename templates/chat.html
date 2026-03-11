@@ -1,0 +1,181 @@
+{%- extends "base.html" %}
+
+{%- block head %}
+{{ super() }}
+{{- macros_seo::seo(config=config, title="Chat") }}
+{%- endblock head %}
+
+{%- block stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ get_url(path='/chat.css', trailing_slash=false, cachebust=true) }}" />
+{%- endblock stylesheets %}
+
+{%- block content %}
+<div class="chat-page">
+  <div class="chat-layout">
+
+    <div class="chat-sidebar">
+      <div class="chat-sidebar-inner">
+        <div class="chat-avatar">
+          <div class="chat-avatar-ring">
+            <img src="/assets/images/profile.jpg" alt="Sanchit Gupta" />
+          </div>
+        </div>
+        <h2>Ask me anything</h2>
+        <p>I'm an AI assistant trained on Sanchit's portfolio. Ask me about his skills, projects, or experience.</p>
+        <ul class="chat-suggestions">
+          <li><button class="suggestion-btn" data-msg="What are Sanchit's top projects?">Top projects</button></li>
+          <li><button class="suggestion-btn" data-msg="What tech stack does Sanchit work with?">Tech stack</button></li>
+          <li><button class="suggestion-btn" data-msg="Tell me about Sanchit's work experience.">Work experience</button></li>
+          <li><button class="suggestion-btn" data-msg="How can I contact Sanchit?">How to contact</button></li>
+        </ul>
+        <button class="button clear-btn" id="clear-chat">Clear chat</button>
+      </div>
+    </div>
+
+    <div class="chat-main">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-message chat-message--ai">
+          <div class="chat-bubble">
+            Hey! I'm Sanchit's AI assistant. Ask me anything about his skills, projects, or experience — I'm here to help!
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-input-area">
+        <form class="chat-input-form" id="chat-form">
+          <textarea
+            id="chat-input"
+            class="chat-input"
+            placeholder="Ask something…"
+            rows="1"
+            autocomplete="off"
+          ></textarea>
+          <button type="submit" class="chat-send-btn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </form>
+        <p class="chat-disclaimer">AI responses may not always be accurate. <a href="/contact">Contact Sanchit directly</a> for important matters.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+{%- endblock content %}
+
+{%- block scripts %}
+{{ super() }}
+<script>
+  const messagesEl = document.getElementById('chat-messages');
+  const form = document.getElementById('chat-form');
+  const input = document.getElementById('chat-input');
+  const clearBtn = document.getElementById('clear-chat');
+
+  // Conversation history sent to the API
+  let history = [];
+
+  function scrollToBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+
+  function createBubble(role, text) {
+    const wrapper = document.createElement('div');
+    wrapper.className = `chat-message chat-message--${role === 'user' ? 'user' : 'ai'}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.textContent = text;
+    wrapper.appendChild(bubble);
+    return wrapper;
+  }
+
+  function createTypingIndicator() {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'chat-message chat-message--ai chat-message--typing';
+    wrapper.innerHTML = `<div class="chat-bubble"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+    return wrapper;
+  }
+
+  const DATA = {
+    projects: `Here are Sanchit's top projects:\n\n• Track the Missing Child (TTMC) — Facial recognition system to locate missing children; reduced rescue time by 47%. GitHub: https://github.com/gsanchit01/TTMC\n\n• Plant Disease Detection System (PDDS) — AI-powered plant disease detection; boosted farm productivity by 35%, reduced detection time by 84%.\n\n• Sentimental Analysis System (SAS) — Classifies emotions (positive/negative/neutral) in text for businesses. GitHub: https://github.com/gsanchit01/san-sentimentanalyser`,
+
+    skills: `Sanchit's tech stack:\n\n• Languages: Python, Java, C, C++, Ruby, JavaScript\n• Backend: Django, Flask, Node.js, Spring Boot\n• Frontend: React.js, Angular.js\n• Databases: PostgreSQL, Elasticsearch, MySQL, MongoDB\n• Cloud: AWS, Azure, GCP\n• CI/CD: Jenkins, Git, Docker\n• Testing: JMeter, Pytest, Selenium\n• Other: Machine Learning, DSA, Web Scraping`,
+
+    experience: `Sanchit's work experience:\n\n1. SDE Full-Stack at InspektLabs (Mar 2024 – Present) — Leads backend service design, real-time observability tools, and secure auth systems.\n\n2. Backend SDE at BLKBOX AI (Aug–Dec 2023) — Scaled microservices in a high-volume distributed system.\n\n3. SDE Intern at GeeksforGeeks (Jun–Aug 2023) — Built backend APIs, automated testing, optimized DB queries.\n\n4. Backend Intern at Solytics Partners (May 2022–May 2023) — Developed backend modules and streamlined deployments.\n\n5. Web Dev Intern at UChamp One (Feb–Apr 2022) — Scaled platform from 100 to 20,000 active users in 12 months.`,
+
+    contact: `You can reach Sanchit through:\n\n• Email: sanchitgupta0101@gmail.com\n• LinkedIn: https://www.linkedin.com/in/aboutsanchit/\n• GitHub: https://github.com/gsanchit01\n• Instagram: @sanchitgupta0101\n• Discord: g.froster\n\nOr use the contact page: /contact`,
+
+    about: `Sanchit Gupta is a Full-Stack Software Development Engineer from India. He loves programming, gaming, and learning new things. He's currently working at InspektLabs (Mar 2024–Present), where he leads backend service design, builds real-time observability tools, and integrates secure authentication systems.`,
+  };
+
+  function getResponse(text) {
+    const q = text.toLowerCase();
+    if (/project|ttmc|pdds|sas|missing child|plant|sentiment/.test(q)) return DATA.projects;
+    if (/skill|tech|stack|language|framework|tool|python|java|node|django|react|aws|docker/.test(q)) return DATA.skills;
+    if (/work|experience|job|intern|company|inspekt|blkbox|geeksforgeeks|solytics|uchamp/.test(q)) return DATA.experience;
+    if (/contact|email|linkedin|github|reach|instagram|discord/.test(q)) return DATA.contact;
+    if (/who|about|sanchit|yourself|introduce/.test(q)) return DATA.about;
+    return `I can tell you about Sanchit's projects, skills, work experience, or how to contact him. What would you like to know?`;
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim()) return;
+
+    // Add user message to UI and history
+    messagesEl.appendChild(createBubble('user', text));
+    history.push({ role: 'user', content: text });
+    scrollToBottom();
+
+    // Show typing indicator
+    const typing = createTypingIndicator();
+    messagesEl.appendChild(typing);
+    scrollToBottom();
+
+    // Simulate network delay
+    await new Promise(r => setTimeout(r, 600));
+
+    const reply = getResponse(text);
+    history.push({ role: 'assistant', content: reply });
+    typing.remove();
+    messagesEl.appendChild(createBubble('assistant', reply));
+    scrollToBottom();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    input.value = '';
+    input.style.height = 'auto';
+    sendMessage(text);
+  });
+
+  // Auto-grow textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+  });
+
+  // Send on Enter (Shift+Enter for newline)
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      form.dispatchEvent(new Event('submit'));
+    }
+  });
+
+  // Suggestion buttons
+  document.querySelectorAll('.suggestion-btn').forEach((btn) => {
+    btn.addEventListener('click', () => sendMessage(btn.dataset.msg));
+  });
+
+  // Clear chat
+  clearBtn.addEventListener('click', () => {
+    history = [];
+    messagesEl.innerHTML = '';
+    const welcome = createBubble('assistant', "Hey! I'm Sanchit's AI assistant. Ask me anything about his skills, projects, or experience — I'm here to help!");
+    messagesEl.appendChild(welcome);
+  });
+</script>
+{%- endblock scripts %}

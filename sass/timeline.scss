@@ -14,16 +14,23 @@ $two-columns-breakpoint: 1170px;
     width: 90%;
   }
 
+  /* Gradient vertical line */
   &::before {
-    background: #1b1b1b;
-    background-image: linear-gradient(180deg, #fff 0, #1b1b1b 30px, #1b1b1b calc(100% - 30px), #fff);
-    border-radius: 4px;
     content: "";
+    border-radius: 4px;
     height: 100%;
     position: absolute;
     top: 0;
     width: 4px;
-
+    background: linear-gradient(
+      180deg,
+      transparent 0,
+      #38bdf8 40px,
+      #818cf8 50%,
+      #38bdf8 calc(100% - 40px),
+      transparent
+    );
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
     left: 18px;
 
     @media only screen and (min-width: $two-columns-breakpoint) {
@@ -48,12 +55,20 @@ $two-columns-breakpoint: 1170px;
 
     &-icon {
       border-radius: 50%;
-      @include mixins.box-shadow;
       height: 40px;
       left: 0;
       position: absolute;
       top: 0;
       width: 40px;
+      border: 2px solid rgba(56, 189, 248, 0.25);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.2), 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+
+      &:hover {
+        border-color: rgba(56, 189, 248, 0.6);
+        box-shadow: 0 0 24px rgba(56, 189, 248, 0.4), 0 4px 16px rgba(0, 0, 0, 0.5);
+        transform: scale(1.08);
+      }
 
       @media only screen and (min-width: $two-columns-breakpoint) {
         width: 60px;
@@ -65,23 +80,57 @@ $two-columns-breakpoint: 1170px;
       svg {
         fill: currentColor;
         display: block;
-        width: 24px;
-        height: 24px;
+        width: 22px;
+        height: 22px;
         left: 50%;
-        margin-left: -12px;
-        margin-top: -12px;
+        margin-left: -11px;
+        margin-top: -11px;
         position: relative;
         top: 50%;
+
+        @media only screen and (min-width: $two-columns-breakpoint) {
+          width: 26px;
+          height: 26px;
+          margin-left: -13px;
+          margin-top: -13px;
+        }
       }
     }
 
     &-content {
-      @include mixins.box-shadow;
-      background: #fff;
-      border-radius: 0.25em;
+      background: var(--timeline-card-bg, #fff);
+      color: var(--timeline-card-text, rgba(0,0,0,0.85));
+      border-radius: 12px;
       margin-left: 60px;
-      padding: 1em;
+      padding: 1em 1.2em;
       position: relative;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--timeline-card-border, rgba(0,0,0,0.06));
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+      @media (max-width: 599px) {
+        margin-left: 52px;
+        padding: 0.8em 1em;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Arrow pointer */
+      &::before {
+        content: "";
+        position: absolute;
+        left: -8px;
+        top: 14px;
+        width: 14px;
+        height: 14px;
+        background: var(--timeline-arrow-bg, #fff);
+        border-left: 1px solid var(--timeline-card-border, rgba(0,0,0,0.06));
+        border-bottom: 1px solid var(--timeline-card-border, rgba(0,0,0,0.06));
+        transform: rotate(45deg);
+      }
 
       &::after {
         clear: both;
@@ -93,53 +142,80 @@ $two-columns-breakpoint: 1170px;
         margin-left: 0;
         padding: 1.5em;
         width: 44%;
+
+        &::before {
+          left: auto;
+          right: -8px;
+          border-left: none;
+          border-right: 1px solid rgba(0, 0, 0, 0.06);
+          border-top: 1px solid rgba(0, 0, 0, 0.06);
+          border-bottom: none;
+        }
       }
 
       h4 {
-        font-size: 1.5rem;
-        font-weight: 400;
+        font-size: 1.4rem;
+        font-weight: 500;
         line-height: 1.334;
-        letter-spacing: 0em;
         margin: 0;
+        color: #111;
       }
 
       h5 {
-        font-size: 1.25rem;
+        font-size: 1rem;
         font-weight: 500;
         line-height: 1.6;
-        letter-spacing: 0.0075em;
-        margin: 0;
+        margin: 4px 0 0;
+        color: var(--timeline-h5-color, #38bdf8);
+
+        a {
+          color: inherit;
+          &:hover {
+            color: #818cf8;
+          }
+        }
       }
 
       p {
-        font-size: 1rem;
+        font-size: 0.95rem;
         font-weight: 400;
-        line-height: 1.6;
-        margin: 1em 0 0;
+        line-height: 1.7;
+        margin: 0.75em 0 0;
+        color: rgba(0, 0, 0, 0.75);
       }
     }
 
     @media only screen and (min-width: $two-columns-breakpoint) {
       &:nth-child(2n) &-content {
         float: right;
+
+        &::before {
+          right: auto;
+          left: -8px;
+          border-right: none;
+          border-left: 1px solid rgba(0, 0, 0, 0.06);
+          border-top: none;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
       }
     }
 
     &-date {
-      color: #333;
-      font-size: 0.8125rem;
-      font-weight: 500;
+      font-size: 0.8rem;
+      font-weight: 600;
       display: inline-block;
       float: left;
-      opacity: 0.7;
       padding: 0.8em 0;
+      color: rgba(56, 189, 248, 0.8);
+      letter-spacing: 0.03em;
 
       @media only screen and (min-width: $two-columns-breakpoint) {
-        font-size: 1rem;
+        font-size: 0.9rem;
         left: 124%;
         position: absolute;
         top: 6px;
         width: 100%;
+        color: rgba(232, 232, 244, 0.6);
       }
     }
 

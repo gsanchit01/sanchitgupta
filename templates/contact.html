@@ -1,0 +1,143 @@
+{%- extends "base.html" %}
+{%- import 'macros/particles.html' as macros_particles %}
+
+{%- block head %}
+{{ super() }}
+{{- macros_seo::seo(config=config, title="Contact") }}
+{%- endblock head %}
+
+{%- block stylesheets %}
+{{ super() }}
+<link rel="stylesheet" href="{{ get_url(path='/contact.css', trailing_slash=false, cachebust=true) }}" />
+{%- endblock stylesheets %}
+
+{%- block content %}
+{{- macros_particles::particles_dom(style="position: fixed; inset: 0; z-index: -10;") }}
+<div class="contact-page">
+  <div class="container">
+
+    <div class="contact-header">
+      <h1>Get In Touch</h1>
+      <p>Have a project in mind or just want to say hello? Fill out the form below and I'll get back to you as soon as possible.</p>
+    </div>
+
+    <div class="contact-grid">
+
+      <div class="contact-info">
+        <h2>Contact Info</h2>
+        <div class="contact-items">
+          {% for social in config.extra.footer.socials %}
+          <div class="contact-item">
+            <span class="contact-label">{{ social.label }}</span>
+            <a href="{{ social.link }}" target="_blank" rel="me noopener" data-umami-event="{{ social.name }}-contact-page">
+              {{ social.value }}
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="contact-map">
+          <div class="contact-map-label">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Delhi, India
+          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192776!2d77.06889754725782!3d28.52758200617607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sNew%20Delhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1678886400000!5m2!1sen!2sin"
+            style="border:0;"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Delhi, India"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <form name="contact" method="POST" data-netlify="true" class="contact-form" id="contact-form">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="Your name" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="your@email.com" />
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" required placeholder="What's this about?" />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required rows="5" placeholder="Your message..."></textarea>
+          </div>
+
+          <div class="form-meta">
+            <div class="form-meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              Usually replies within 24 hours
+            </div>
+            <div class="form-meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              Open to freelance &amp; collaboration
+            </div>
+            <div class="form-meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+              Available for full-time roles
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="button button--big submit-btn">Send Message</button>
+          </div>
+
+          <div class="form-success" id="form-success" hidden>
+            <p>Thanks for reaching out! I'll get back to you soon. ✓</p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+{%- endblock content %}
+
+{%- block scripts %}
+{{ super() }}
+{{- macros_particles::particles_script() }}
+<script>
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    const fd = new FormData(form);
+    try {
+      const res = await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    fd.get('name'),
+          email:   fd.get('email'),
+          subject: fd.get('subject'),
+          message: fd.get('message'),
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      form.reset();
+      success.hidden = false;
+      btn.textContent = 'Sent!';
+    } catch {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
+{%- endblock scripts %}
