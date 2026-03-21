@@ -281,9 +281,19 @@ content = """Developed and scaled microservices, enhancing system resilience and
 title = "Software Development Engineer (Full-Stack Developer)"
 subtitle = "InspektLabs"
 orgurl = "https://inspektlabs.com/"
-date = "March 2024 - Present"
+date = "March 2024 - April 2025"
 icon = "/assets/icons/node.svg"
 background = "#1a1530"
 foreground = "#c4b5fd"
 content = """Led the design and optimization of backend services, significantly improving system performance and scalability. Spearheaded the implementation of real-time observability tools, ensuring smooth monitoring and efficient operations. Played a key role in integrating secure authentication systems, enabling streamlined user onboarding."""
+
+[[extra.timeline]]
+title = "Senior Software Engineer (SDE - II)"
+subtitle = "Floydwiz Technologies Pvt. Ltd. (Primebook India)"
+orgurl = "https://primebook.in/"
+date = "May 2025 - Present"
+icon = "/assets/icons/java.svg"
+background = "#0a2a1a"
+foreground = "#4ade80"
+content = """Built the complete backend for PrimeSecure MDM, PrimeX Windows cloud desktop, and SmartVission TV Box MDM — covering device enrollment, policy management, RBAC, payments, analytics, and FCM notifications. Set up Metabase and Power BI dashboards for usage reporting and marketing data integration. Managed AWS infrastructure including Lambda layers, API Gateway, Cloudflare R2, and database optimization."""
 +++
