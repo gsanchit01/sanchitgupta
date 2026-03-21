@@ -164,15 +164,15 @@ hr {
   margin: 10px auto;
 }
 
-/* ── Parallax image polish ── */
+/* ── Parallax image polish (shadows passed to imageReveal via custom props) ── */
 .hello-picture {
-  filter: drop-shadow(0 0 24px rgba(56, 189, 248, 0.18));
+  --img-shadow: drop-shadow(0 0 24px rgba(56, 189, 248, 0.18));
 }
 
 .im-picture {
-  filter: drop-shadow(0 0 12px rgba(129, 140, 248, 0.2));
+  --img-shadow: drop-shadow(0 0 12px rgba(129, 140, 248, 0.2));
 }
 
 .sg-picture {
-  filter: drop-shadow(0 0 32px rgba(56, 189, 248, 0.15));
+  --img-shadow: drop-shadow(0 0 32px rgba(56, 189, 248, 0.15));
 }

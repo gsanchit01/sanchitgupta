@@ -25,6 +25,19 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
+@keyframes imageReveal {
+  from {
+    opacity: 0;
+    filter: blur(20px) var(--img-shadow);
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0px) var(--img-shadow);
+    transform: scale(1);
+  }
+}
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50%       { transform: translateY(-12px); }
@@ -125,17 +138,23 @@ body {
   }
 }
 
-/* ── Homepage floating images ── */
+/* ── Homepage image reveal + floating ── */
 .hello-picture {
-  animation: floatSlow 6s ease-in-out infinite;
+  opacity: 0;
+  animation: imageReveal 2s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+             floatSlow 6s ease-in-out 2s infinite;
 }
 
 .im-picture {
-  animation: float 4s ease-in-out infinite 1s;
+  opacity: 0;
+  animation: imageReveal 2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards,
+             float 4s ease-in-out 2.3s infinite;
 }
 
 .sg-picture {
-  animation: floatSlow 7s ease-in-out infinite 0.5s;
+  opacity: 0;
+  animation: imageReveal 2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s forwards,
+             floatSlow 7s ease-in-out 2.15s infinite;
 }
 
 /* ── Animated gradient text ── */

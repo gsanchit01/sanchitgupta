@@ -83,6 +83,3 @@ path = "/about"
 [[extra.links]]
 name = "Contact"
 path = "/contact"
-[[extra.links]]
-name = "Source"
-path = "https://github.com/gsanchit01/sanchitgupta"
