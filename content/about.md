@@ -1,7 +1,7 @@
 +++
 
 title = "About me"
-description = "about me containg my project and work experience"
+description = "Learn about Sanchit Gupta — Full-Stack SDE-II at Primebook India with 4+ years of experience in Python, Java, React, Django, Node.js, AWS. View projects, skills, and work experience."
 template = "about.html"
 
 [extra]
