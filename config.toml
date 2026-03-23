@@ -3,7 +3,7 @@ base_url = "https://sanchitgupta.vercel.app/"
 
 # The site title and description; used in feeds by default.
 title = "Sanchit Gupta"
-description = "Hey, I'm Sanchit Gupta from India. I love programming, gaming and learning new things!"
+description = "Sanchit Gupta is a Full-Stack Software Engineer (SDE-II) based in Delhi, India with 4+ years of experience. Specializes in Python, Java, React, Django, Node.js, AWS, and building scalable backend systems."
 
 # The default language; used in feeds.
 default_language = "en"
@@ -45,6 +45,9 @@ smart_punctuation = true
 
 [extra]
 long_title = "Sanchit Gupta"
+author = "Sanchit Gupta"
+keywords = "Sanchit Gupta, Full Stack Developer, SDE-II, Software Engineer, Delhi India, Python, Java, React, Django, Node.js, AWS, Azure, GCP, Backend Developer, Portfolio"
+og_image = "/assets/images/profile.jpg"
 favicon = "/assets/images/profile.jpg"
 logo = "/assets/images/logo.png"
 
