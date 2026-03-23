@@ -5,7 +5,7 @@ description = "about me containg my project and work experience"
 template = "about.html"
 
 [extra]
-profile_picture = "/assets/images/profile.jpg"
+profile_picture = "/assets/images/profile-new.jpg"
 below_arrow = "/assets/images/arrow.gif"
 name = "Sanchit Gupta"
 subtitle = "About Me"
