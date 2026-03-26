@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cursor Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0d0d18;
+      color: #e8e8f4;
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      cursor: none;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 2rem 0 0.5rem;
+      font-size: 1.5rem;
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p.sub { text-align:center; color:#8888aa; margin-bottom:2rem; font-size:0.85rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 0 2rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .card h2 { font-size: 1rem; color: #38bdf8; }
+    .card p  { font-size: 0.8rem; color: #8888aa; line-height: 1.5; }
+
+    .preview {
+      height: 140px;
+      background: #13131f;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      color: #555;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-use {
+      background: linear-gradient(135deg, #38bdf8, #818cf8);
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1.2rem;
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: none;
+      align-self: flex-start;
+      letter-spacing: 0.04em;
+    }
+    .btn-use:hover { opacity: 0.85; }
+
+    /* ─── 1. Inverter ─── */
+    #zone-1 { cursor: none; }
+    .inv-circle {
+      position: absolute;
+      width: 40px; height: 40px;
+      background: #fff;
+      border-radius: 50%;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      transition: width .15s, height .15s;
+      display: none;
+    }
+
+    /* ─── 2. Dot + Ring (current) ─── */
+    #zone-2 { cursor: none; }
+    .demo-dot {
+      position: absolute;
+      width: 8px; height: 8px;
+      background: #38bdf8;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      display: none;
+      mix-blend-mode: screen;
+    }
+    .demo-ring {
+      position: absolute;
+      width: 34px; height: 34px;
+      border: 1.5px solid rgba(129,140,248,0.7);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%,-50%);
+      display: none;
+    }
+
+    /* ─── 3. Crosshair ─── */
+    #zone-3 { cursor: none; }
+    .cross-h, .cross-v {
+      position: absolute;
+      background: rgba(56,189,248,0.5);
+      pointer-events: none;
+      display: none;
+    }
+    .cross-h { width: 100%; height: 1px; top: 50%; }
+    .cross-v { height: 100%; width: 1px; left: 50%; }
+    .cross-dot {
+      position: absolute;
+      width: 6px; height: 6px;
+      background: #38bdf8;
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 0 8px #38bdf8;
+    }
+
+    /* ─── 4. Sparkles ─── */
+    #zone-4 { cursor: none; }
+
+    @keyframes spark-dot {
+      0%   { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%,-50%) scale(0) translateY(-12px); }
+    }
+    @keyframes spark-star {
+      0%   { opacity: 1; transform: translate(-50%,-50%) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translate(-50%,-50%) rotate(120deg) scale(0); }
+    }
+    @keyframes spark-streak {
+      0%   { opacity: 0.9; transform: translate(-50%,-50%) scaleX(1); }
+      100% { opacity: 0;   transform: translate(-50%,-50%) scaleX(0); }
+    }
+
+    .spark-dot {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: spark-dot 0.7s ease forwards;
+    }
+    .spark-star {
+      position: absolute;
+      pointer-events: none;
+      animation: spark-star 0.8s ease forwards;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .spark-streak {
+      position: absolute;
+      height: 2px;
+      border-radius: 2px;
+      pointer-events: none;
+      animation: spark-streak 0.4s ease forwards;
+      transform-origin: left center;
+    }
+    .spark-cursor {
+      position: absolute;
+      width: 10px; height: 10px;
+      background: radial-gradient(circle, #fff 0%, #a78bfa 60%, transparent 100%);
+      border-radius: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+      display: none;
+      box-shadow: 0 0 12px 4px rgba(167,139,250,0.6);
+    }
+
+    /* ─── 5. SVG Arrow ─── */
+    #zone-5 { cursor: none; }
+
+    @keyframes arrow-pulse {
+      0%, 100% { filter: drop-shadow(0 0 4px #38bdf8) drop-shadow(0 0 8px rgba(56,189,248,0.4)); }
+      50%       { filter: drop-shadow(0 0 8px #38bdf8) drop-shadow(0 0 16px rgba(129,140,248,0.6)); }
+    }
+    .svg-arrow {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      width: 30px;
+      animation: arrow-pulse 1.4s ease-in-out infinite;
+      transition: transform 0.08s ease;
+    }
+    .svg-arrow-ghost {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      width: 30px;
+      opacity: 0.25;
+      filter: drop-shadow(0 0 6px #818cf8);
+    }
+  </style>
+</head>
+<body>
+  <h1>Cursor Style Demo</h1>
+  <p class="sub">Move mouse into each box to preview — click "Use This" to pick</p>
+
+  <div class="grid">
+
+    <!-- 1. Inverter -->
+    <div class="card">
+      <h2>1. Inverter Circle</h2>
+      <p>White circle with mix-blend-mode:difference — inverts all colors beneath it. Most popular on premium design portfolios.</p>
+      <div class="preview" id="zone-1">
+        <div class="inv-circle" id="inv-c"></div>
+        <span>Hover here</span>
+      </div>
+      <button class="btn-use" data-style="1">Use This →</button>
+    </div>
+
+    <!-- 2. Dot + Ring -->
+    <div class="card">
+      <h2>2. Dot + Lag Ring (Current)</h2>
+      <p>Small cyan dot snaps instantly. Purple ring lazily follows behind with a smooth easing lag.</p>
+      <div class="preview" id="zone-2">
+        <div class="demo-dot" id="demo-dot"></div>
+        <div class="demo-ring" id="demo-ring"></div>
+        <span>Hover here</span>
+      </div>
+      <button class="btn-use" data-style="2">Use This →</button>
+    </div>
+
+    <!-- 3. Crosshair -->
+    <div class="card">
+      <h2>3. Crosshair</h2>
+      <p>Thin horizontal + vertical lines tracking the cursor within the element. Techy / developer aesthetic.</p>
+      <div class="preview" id="zone-3">
+        <div class="cross-h" id="ch"></div>
+        <div class="cross-v" id="cv"></div>
+        <div class="cross-dot" id="cdot"></div>
+        <span>Hover here</span>
+      </div>
+      <button class="btn-use" data-style="3">Use This →</button>
+    </div>
+
+    <!-- 4. Sparkles -->
+    <div class="card">
+      <h2>4. Trailing Sparkles ✨</h2>
+      <p>Stars, dots, and streaks spawn on move — each fades with physics. Glow core at cursor center.</p>
+      <div class="preview" id="zone-4">
+        <div class="spark-cursor" id="spark-cur"></div>
+        <span>Move mouse fast here</span>
+      </div>
+      <button class="btn-use" data-style="4">Use This →</button>
+    </div>
+
+    <!-- 5. SVG Arrow -->
+    <div class="card">
+      <h2>5. Glowing Arrow + Ghost Trail</h2>
+      <p>Sharp gradient arrow with a pulsing glow aura. A faded ghost arrow lags behind for depth.</p>
+      <div class="preview" id="zone-5">
+        <svg class="svg-arrow-ghost" id="svg-ghost" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 2L21 11L13 14L10 22L3 2Z" fill="#818cf8"/>
+        </svg>
+        <svg class="svg-arrow" id="svg-arr" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#38bdf8"/>
+              <stop offset="100%" stop-color="#818cf8"/>
+            </linearGradient>
+          </defs>
+          <path d="M3 2L21 11L13 14L10 22L3 2Z" fill="url(#ag)" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        </svg>
+        <span>Hover here</span>
+      </div>
+      <button class="btn-use" data-style="5">Use This →</button>
+    </div>
+
+  </div>
+
+  <script>
+    // ─── 1. Inverter ───
+    const zone1 = document.getElementById('zone-1');
+    const invC  = document.getElementById('inv-c');
+    zone1.addEventListener('mousemove', e => {
+      const r = zone1.getBoundingClientRect();
+      invC.style.left = (e.clientX - r.left) + 'px';
+      invC.style.top  = (e.clientY - r.top)  + 'px';
+    });
+    zone1.addEventListener('mouseenter', () => invC.style.display = 'block');
+    zone1.addEventListener('mouseleave', () => invC.style.display = 'none');
+
+    // ─── 2. Dot + Ring ───
+    const zone2    = document.getElementById('zone-2');
+    const demoDot  = document.getElementById('demo-dot');
+    const demoRing = document.getElementById('demo-ring');
+    let dmx = 0, dmy = 0, drx = 0, dry = 0;
+    zone2.addEventListener('mousemove', e => {
+      const r = zone2.getBoundingClientRect();
+      dmx = e.clientX - r.left; dmy = e.clientY - r.top;
+      demoDot.style.left = dmx + 'px'; demoDot.style.top = dmy + 'px';
+    });
+    zone2.addEventListener('mouseenter', () => { demoDot.style.display='block'; demoRing.style.display='block'; });
+    zone2.addEventListener('mouseleave', () => { demoDot.style.display='none';  demoRing.style.display='none'; });
+    (function ringLoop() {
+      drx += (dmx - drx) * 0.12; dry += (dmy - dry) * 0.12;
+      demoRing.style.left = drx + 'px'; demoRing.style.top = dry + 'px';
+      requestAnimationFrame(ringLoop);
+    })();
+
+    // ─── 3. Crosshair ───
+    const zone3 = document.getElementById('zone-3');
+    const ch = document.getElementById('ch'), cv = document.getElementById('cv'), cdot = document.getElementById('cdot');
+    zone3.addEventListener('mousemove', e => {
+      const r = zone3.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      ch.style.top  = y + 'px'; cv.style.left = x + 'px';
+      cdot.style.left = x + 'px'; cdot.style.top = y + 'px';
+    });
+    zone3.addEventListener('mouseenter', () => { ch.style.display='block'; cv.style.display='block'; cdot.style.display='block'; });
+    zone3.addEventListener('mouseleave', () => { ch.style.display='none';  cv.style.display='none';  cdot.style.display='none'; });
+
+    // ─── 4. Sparkles ───
+    const zone4    = document.getElementById('zone-4');
+    const sparkCur = document.getElementById('spark-cur');
+    const colors   = ['#38bdf8','#818cf8','#a78bfa','#f472b6','#34d399','#fbbf24'];
+    let lastSpark  = 0;
+
+    zone4.addEventListener('mousemove', e => {
+      const r = zone4.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      sparkCur.style.left = x + 'px'; sparkCur.style.top = y + 'px';
+
+      const now = Date.now();
+      if (now - lastSpark < 30) return;
+      lastSpark = now;
+
+      const col = colors[Math.floor(Math.random() * colors.length)];
+      const type = Math.random();
+
+      if (type < 0.4) {
+        // dot
+        const s = document.createElement('div');
+        s.className = 'spark-dot';
+        const sz = Math.random() * 7 + 3;
+        s.style.cssText = `width:${sz}px;height:${sz}px;background:${col};box-shadow:0 0 ${sz*2}px ${col};left:${x+(Math.random()-.5)*24}px;top:${y+(Math.random()-.5)*24}px;`;
+        zone4.appendChild(s);
+        setTimeout(() => s.remove(), 700);
+      } else if (type < 0.75) {
+        // star
+        const s = document.createElement('div');
+        s.className = 'spark-star';
+        const sz = Math.random() * 10 + 6;
+        s.style.cssText = `width:${sz}px;height:${sz}px;background:${col};left:${x+(Math.random()-.5)*28}px;top:${y+(Math.random()-.5)*28}px;`;
+        zone4.appendChild(s);
+        setTimeout(() => s.remove(), 800);
+      } else {
+        // streak
+        const s = document.createElement('div');
+        s.className = 'spark-streak';
+        const len = Math.random() * 22 + 10;
+        const ang = Math.random() * 360;
+        s.style.cssText = `width:${len}px;background:linear-gradient(90deg,${col},transparent);left:${x}px;top:${y}px;transform:translate(-50%,-50%) rotate(${ang}deg);`;
+        zone4.appendChild(s);
+        setTimeout(() => s.remove(), 400);
+      }
+    });
+    zone4.addEventListener('mouseenter', () => sparkCur.style.display = 'block');
+    zone4.addEventListener('mouseleave', () => sparkCur.style.display = 'none');
+
+    // ─── 5. SVG Arrow + Ghost ───
+    const zone5   = document.getElementById('zone-5');
+    const svgArr  = document.getElementById('svg-arr');
+    const svgGhost= document.getElementById('svg-ghost');
+    let ax = 0, ay = 0, gx = 0, gy = 0;
+
+    zone5.addEventListener('mousemove', e => {
+      const r = zone5.getBoundingClientRect();
+      ax = e.clientX - r.left; ay = e.clientY - r.top;
+      svgArr.style.left = ax + 'px'; svgArr.style.top = ay + 'px';
+    });
+    zone5.addEventListener('mouseenter', () => {
+      svgArr.style.display = 'block'; svgGhost.style.display = 'block';
+    });
+    zone5.addEventListener('mouseleave', () => {
+      svgArr.style.display = 'none'; svgGhost.style.display = 'none';
+    });
+    (function ghostLoop() {
+      gx += (ax - gx) * 0.1; gy += (ay - gy) * 0.1;
+      svgGhost.style.left = gx + 'px'; svgGhost.style.top = gy + 'px';
+      requestAnimationFrame(ghostLoop);
+    })();
+
+    // ─── Use This button ───
+    document.querySelectorAll('.btn-use').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const style = btn.dataset.style;
+        const names = {
+          '1': 'Inverter Circle',
+          '2': 'Dot + Lag Ring',
+          '3': 'Crosshair',
+          '4': 'Trailing Sparkles',
+          '5': 'Custom SVG Arrow'
+        };
+        alert('You selected: ' + names[style] + '\n\nBata do Claude Code ko — woh implement kar dega!');
+      });
+    });
+  </script>
+</body>
+</html>
