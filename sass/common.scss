@@ -25,6 +25,7 @@
   z-index: 99999;
   animation: arrow-pulse 1.4s ease-in-out infinite;
   transition: opacity 0.15s ease, transform 0.08s ease;
+  opacity: 0;
 }
 
 .cursor-ghost {
@@ -34,15 +35,11 @@
   width: 28px;
   pointer-events: none;
   z-index: 99998;
-  opacity: 0.22;
+  opacity: 0;
   filter: drop-shadow(0 0 6px #818cf8);
   transition: opacity 0.15s ease;
 }
 
-body.cursor-hidden .cursor-arrow,
-body.cursor-hidden .cursor-ghost {
-  opacity: 0;
-}
 
 body.cursor-hover .cursor-arrow {
   transform: scale(1.15);

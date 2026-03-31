@@ -87,12 +87,14 @@
       var arrow = document.getElementById('cursor-arrow');
       var ghost = document.getElementById('cursor-ghost');
       var mx = 0, my = 0, gx = 0, gy = 0;
+      var firstMove = true;
       document.addEventListener('mousemove', function (e) {
         mx = e.clientX; my = e.clientY;
         arrow.style.left = mx + 'px'; arrow.style.top = my + 'px';
+        if (firstMove) { firstMove = false; arrow.style.opacity = '1'; ghost.style.opacity = '0.22'; }
       });
-      document.addEventListener('mouseenter', function () { document.body.classList.remove('cursor-hidden'); });
-      document.addEventListener('mouseleave', function () { document.body.classList.add('cursor-hidden'); });
+      document.addEventListener('mouseenter', function () { arrow.style.opacity = '1'; ghost.style.opacity = '0.22'; });
+      document.addEventListener('mouseleave', function () { arrow.style.opacity = '0'; ghost.style.opacity = '0'; });
       var hoverSel = 'a, button, [role="button"], input, textarea, select, label, .contact-item, .button';
       document.addEventListener('mouseover', function (e) { if (e.target.closest(hoverSel)) document.body.classList.add('cursor-hover'); });
       document.addEventListener('mouseout',  function (e) { if (e.target.closest(hoverSel)) document.body.classList.remove('cursor-hover'); });
